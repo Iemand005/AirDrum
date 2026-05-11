@@ -17,7 +17,7 @@ ESP32 is Whadda receiver. (WPI469R)
   3.3V + rail -> WPI469T VCC
   3.3V + rail -> Accelerometer VCC
   
-
+For new just read the code to see what pins to connect to which components we should probably make al ittle board schematic to wire it right
 
 
 

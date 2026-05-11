@@ -12,7 +12,16 @@ SDA       A4
 SCL       A5
 */
 
+/*
+WPI469T   Arduino Nano
+VCC       3.3V
+GND       GND
+SIG       D2?
+*/
+
+#define pinButton 5
 #define pinLed 4
+#define pinTransmitter 2
 
 // MPU-9265 I2C address
 #define MPU_ADDR 0x68
@@ -61,17 +70,9 @@ void readAccel(int16_t &x, int16_t &y, int16_t &z) {
     z = (Wire.read() << 8) | Wire.read();
 }
 
-
-void setup() {
-
-}
-
-
 // Transmitter code
 
-#define pinButton 5
-#define pinLed 4
-#define pinTransmitter 2
+
 
 RCSwitch mySwitch = RCSwitch();
 
@@ -105,7 +106,7 @@ void setup() {
 
     // Server init
 
-    Serial.begin(115200);
+    // Serial.begin(115200);
     Serial.println("Starting server...");
 
     pinMode(pinButton, INPUT_PULLUP);
