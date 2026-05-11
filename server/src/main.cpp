@@ -63,6 +63,25 @@ void readAccel(int16_t &x, int16_t &y, int16_t &z) {
 
 
 void setup() {
+
+}
+
+
+// Transmitter code
+
+#define pinButton 5
+#define pinLed 4
+#define pinTransmitter 2
+
+RCSwitch mySwitch = RCSwitch();
+
+int code = 0;
+bool isButtonPressed = false;
+
+void setup() {
+
+    // Accelerometer init
+
     Serial.begin(115200);
     Serial.println("Starting MPU-9265 accelerometer example...");
 
@@ -83,9 +102,23 @@ void setup() {
     Serial.println(" Z: "); Serial.println(baseZ);
 
     Serial.println("Setup complete");
+
+    // Server init
+
+    Serial.begin(115200);
+    Serial.println("Starting server...");
+
+    pinMode(pinButton, INPUT_PULLUP);
+    pinMode(pinLed, OUTPUT);
+
+    mySwitch.enableTransmit(pinTransmitter);
+
+    Serial.println("Setup complete");
 }
 
 void loop() {
+
+    // Reaad accel data
     int16_t x, y, z;
     readAccel(x, y, z);
 
@@ -105,35 +138,9 @@ void loop() {
         digitalWrite(pinLed, LOW);
     }
 
-    // don't read too fast to avoid overwhelming the serial output and to give the LED time to respond
-    delay(50); // Adjust delay as needed for responsiveness
-}
+    // Broadcast
 
 
-// Transmitter code
-
-#define pinButton 5
-#define pinLed 4
-#define pinTransmitter 2
-
-RCSwitch mySwitch = RCSwitch();
-
-int code = 0;
-bool isButtonPressed = false;
-
-void setup() {
-    Serial.begin(115200);
-    Serial.println("Starting server...");
-
-    pinMode(pinButton, INPUT_PULLUP);
-    pinMode(pinLed, OUTPUT);
-
-    mySwitch.enableTransmit(pinTransmitter);
-
-    Serial.println("Setup complete");
-}
-
-void loop() {
     bool digitalReadButton = !digitalRead(pinButton);
 
     if (digitalReadButton == HIGH && !isButtonPressed) {
