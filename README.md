@@ -13,8 +13,11 @@ ESP32 is Whadda receiver. (WPI469R)
 
   All the GND to GND
 
-  Arduino 3V3 -> WPI469T VCC
-  Arduino 3V3 -> WPI469T VCC
+  Arduino 3V3 -> + rail
+  3.3V + rail -> WPI469T VCC
+  3.3V + rail -> Accelerometer VCC
+
+  
 
 
 
