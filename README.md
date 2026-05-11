@@ -8,7 +8,8 @@ ESP32 is Whadda receiver. (WPI469R)
 
 
 In theory we can also get gyroscope and magnetometer data. 
-Magnetometer could be used to measure strength of a magnetic field, so we could make it make noises if it's moved near a field. 
+Magnetometer could be used to measure strength of a magnetic field, so we could make it make different noises if it's moved near a magnetic field (like one of a speaker or something).
+Gyroscope can  be used to make instrument controls where you can change volume or pitch by rotating the device in any axis
 
 
 ## Wire arrangement
