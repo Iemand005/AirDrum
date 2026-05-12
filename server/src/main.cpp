@@ -159,19 +159,21 @@ Vec3 readGyro() {
 
 // TODO move to ashared thing
 
-enum {
+enum AccelerometerAxis : uint8_t {
     AccelPacketX = 1,
     AccelPacketY = 2,
     AccelPacketZ = 3
 };
 
-struct AccelReportPacket {
-    int8_t id = 69;
+struct AccelReportPacket : long {
+    uint8_t id = 69;
+    AccelerometerAxis axis;
     Vec3I16 acceleration;
 };
 
 void sendAccelerometerData(Vec3I16 accel) {
     AccelReportPacket packet;
+    packet.axis = AccelPacketX;
     packet.acceleration = accel;
     const char *buffer = (char*)&packet;
     mySwitch.send(buffer, sizeof(packet));
