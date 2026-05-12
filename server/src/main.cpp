@@ -250,6 +250,9 @@ void loop() {
         Serial.print("X: "); Serial.print(lowPassedAccel.x);
         Serial.print(" Y: "); Serial.print(lowPassedAccel.y);
         Serial.print(" Z: "); Serial.println(lowPassedAccel.z);
+
+        code++;
+        mySwitch.send(code, 24);
     } else {
         digitalWrite(pinLed, LOW);
     }
