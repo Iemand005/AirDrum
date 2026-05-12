@@ -50,6 +50,10 @@ int16_t baseX, baseY, baseZ;
  */
 struct Vec3I16 {
     int16_t x, y, z;
+
+    void normalize() {
+        
+    }
 };
 
 /**
@@ -152,7 +156,7 @@ void setup() {
 
     // Read baseline (resting position)
     auto acceleration = readAccel();
-    auto rotation = readGyro();
+    gyroBase = readGyro();
 
     baseX = acceleration.x, baseY= acceleration.y, baseZ= acceleration.z;
     Serial.print("Baseline - X: "); Serial.print(baseX);
