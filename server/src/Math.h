@@ -1,6 +1,6 @@
 
-#ifndef MATH_H
-#define MATH_H
+#ifndef Math_h
+#define Math_h
 
 #include <stdint.h>
 
