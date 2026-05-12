@@ -197,7 +197,7 @@ void setup() {
     baseAcceleration = acceleration;
     Serial.print("Baseline - X: "); Serial.print(baseAcceleration.x);
     Serial.print(" Y: "); Serial.print(baseAcceleration.y);
-    Serial.println(" Z: "); Serial.println(baseAcceleration.z);
+    Serial.print(" Z: "); Serial.println(baseAcceleration.z);
 
     Serial.println("Setup complete");
 
@@ -229,7 +229,7 @@ void loop() {
     int magnitude = abs(dx) + abs(dy) + abs(dz);
 
     // magnitude /= 100;
-    magnitude -= 70000;
+    magnitude -= 700;
     magnitude /= 10;
 
     if (magnitude > 255) magnitude = 255;
