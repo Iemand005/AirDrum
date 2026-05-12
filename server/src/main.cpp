@@ -44,11 +44,14 @@ const int threshold = 10;
 // Three-axis baseline values for resting position
 int16_t baseX, baseY, baseZ;
 
-struct Vec3I {
+/**
+ * @brief Vector of 3 16bit integers
+ */
+struct Vec3I16 {
     int16_t x, y, z;
 };
 
-Vec3I lastPos{0,0,0};
+Vec3I16 lastPos{0,0,0};
 
 /**
  * @brief Write a byte to a specific register on the MPU-9265
@@ -66,18 +69,63 @@ void writeRegister(uint8_t reg, uint8_t value) {
 /**
  * @brief Read accelerometer data from the MPU-9265 and return it as three 16-bit integers
  * 
- * @param x 
- * @param y 
- * @param z 
+ * @returns Vector of acceleration
  */
-Vec3I readAccel() {
+Vec3I16 readAccel() {
     Wire.beginTransmission(MPU_ADDR);
     Wire.write(REG_ACCEL_XOUT_H);
     Wire.endTransmission(false);
     Wire.requestFrom(MPU_ADDR, 6);
 
     // MPU-9265 data is big-endian (high byte first)
-    Vec3I pos;
+    Vec3I16 pos;
+    pos.x = (Wire.read() << 8) | Wire.read();
+    pos.y = (Wire.read() << 8) | Wire.read();
+    pos.z = (Wire.read() << 8) | Wire.read();
+    return pos;
+}
+
+
+/**
+ * @brief Read gyroscope data from the MPU-9265 and return it as three 16-bit integers of degrees per second
+ * 
+ * @returns Vector of acceleration
+ */
+Vec3I16 readGyro() {
+    Wire.beginTransmission(MPU_ADDR);
+    Wire.write(0x43); 
+    Wire.endTransmission(false);
+    
+    // Request 6 bytes (2 bytes for each axis: X, Y, Z)
+    Wire.requestFrom(MPU_ADDR, 6, true);
+    
+    Vec3I16 gyro;
+    gyro.x = (Wire.read() << 8) | Wire.read(); 
+    gyro.y = (Wire.read() << 8) | Wire.read(); 
+    gyro.z = (Wire.read() << 8) | Wire.read(); 
+
+    // Convert to degrees per second (dps)
+    float dpsX = gyro.x / 131.0;
+    float dpsY = gyro.y / 131.0;
+    float dpsZ = gyro.z / 131.0;
+
+
+}
+
+
+/**
+ * @brief Read accelerometer data from the MPU-9265 and return it as three 16-bit integers
+ * 
+ * @returns Vector of acceleration
+ */
+Vec3I16 readAccel() {
+    Wire.beginTransmission(MPU_ADDR);
+    Wire.write(REG_ACCEL_XOUT_H);
+    Wire.endTransmission(false);
+    Wire.requestFrom(MPU_ADDR, 6);
+
+    // MPU-9265 data is big-endian (high byte first)
+    Vec3I16 pos;
     pos.x = (Wire.read() << 8) | Wire.read();
     pos.y = (Wire.read() << 8) | Wire.read();
     pos.z = (Wire.read() << 8) | Wire.read();
