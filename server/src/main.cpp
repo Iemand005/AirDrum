@@ -113,7 +113,8 @@ void setup() {
     delay(100);
 
     // Read baseline (resting position)
-    readAccel(baseX, baseY, baseZ);
+    auto pos = readAccel();
+    baseX = pos.x, baseY= pos.y, baseZ= pos.z;
     Serial.print("Baseline - X: "); Serial.print(baseX);
     Serial.print(" Y: "); Serial.print(baseY);
     Serial.println(" Z: "); Serial.println(baseZ);
