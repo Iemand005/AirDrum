@@ -167,29 +167,6 @@ Vec3 readGyro() {
     return dps;
 }
 
-// TODO move to ashared thing
-
-enum AccelerometerAxis : uint8_t {
-    AccelPacketX = 1,
-    AccelPacketY = 2,
-    AccelPacketZ = 3
-};
-
-struct AccelReportPacket {
-    uint8_t id = 69;
-    AccelerometerAxis axis;
-    Vec3I16 acceleration;
-};
-
-void sendAccelerometerData(Vec3I16 accel) {
-    AccelReportPacket packet;
-    packet.axis = AccelPacketX;
-    packet.acceleration = accel;
-    unsigned int buffer = packet;
-    
-    mySwitch.send(unsigned int, sizeof(packet));
-}
-
 
 // Transmitter code
 
