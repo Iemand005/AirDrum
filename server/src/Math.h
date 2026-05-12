@@ -1,5 +1,8 @@
 
-#include <Arduino.h>
+#ifndef H_MATH
+#define H_MATH
+
+#include <stdint.h>
 
 
 /**
@@ -28,3 +31,5 @@ struct Vec3 {
         // }
     }
 };
+
+#endif

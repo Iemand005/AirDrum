@@ -60,6 +60,8 @@ Vec3 filterState = { 0.0f, 0.0f, 16384.0f };
 // Filter coefficient
 const float ALPHA = 0.15f; 
 
+int16_t
+
 Vec3I16 lowPassFilter(Vec3I16 raw) {
     filterState.x = (raw.x * ALPHA) + (filterState.x * (1.0f - ALPHA));
     filterState.y = (raw.y * ALPHA) + (filterState.y * (1.0f - ALPHA));
