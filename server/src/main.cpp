@@ -157,6 +157,11 @@ Vec3 readGyro() {
     return dps;
 }
 
+// TODO move to ashared thing
+
+void sendAccelerometerData() {
+
+}
 
 
 // Transmitter code
