@@ -61,15 +61,6 @@ struct Vec3I16 {
  */
 struct Vec3 {
     float x, y, z;
-
-    void normalize() {
-        // float length = std::sqrt(x * x + y * y + z * z);
-        // if (length > 0.0f) {
-        //     x /= length;
-        //     y /= length;
-        //     z /= length;
-        // }
-    }
 };
 
 
