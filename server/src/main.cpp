@@ -1,5 +1,6 @@
 #include <Arduino.h>
 #include <RCSwitch.h>
+#include <Wire.h>
 
 
 // Accelerometer reader
