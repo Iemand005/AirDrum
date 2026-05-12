@@ -42,6 +42,7 @@ VCC -> resistor 220 Ohm -> Arduino D3
 // Threshold for movement detection (tune as needed)
 const int threshold = 10;
 
+const bool applyLowPassFilter = true;
 
 /**
  * @brief Vector of 3 16bit integers
@@ -105,17 +106,14 @@ Vec3I16 readAccel() {
     acceleration.x = (Wire.read() << 8) | Wire.read();
     acceleration.y = (Wire.read() << 8) | Wire.read();
     acceleration.z = (Wire.read() << 8) | Wire.read();
+
+    if (applyLowPassFilter) acceleration = lowPassFilter(acceleration);
+
     return acceleration;
 }
 
 Vec3I16 readLinearAccel() {
-    Vec3I16 raw = readAccel();
-
-    Vec3I16 linearAccel;
-    linearAccel.x = raw.x - baseAcceleration.x;
-    linearAccel.y = raw.y - baseAcceleration.y;
-    linearAccel.z = raw.z - baseAcceleration.z;
-    return linearAccel;
+    return readAccel() - baseAcceleration;
 }
 
 
@@ -220,7 +218,7 @@ void setup() {
 void loop() {
 
     // Reaad accel data
-    auto currentAccel = readAccel();
+    auto currentAccel = readLinearAccel();
     auto lowPassedAccel = lowPassFilter(currentAccel);
     
     // Calculate difference from baseline
