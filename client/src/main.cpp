@@ -2,8 +2,8 @@
 #include <RCSwitch.h>
 
 
-#define pinReceiver 13 // GPIO pin connected to the data pin of the 433MHz receiver module. ESP32 supports interrupts on almost any GPIO, so you can choose a different pin if needed.
-#define pinLed 2
+#define pinReceiver 2 // GPIO pin connected to the data pin of the 433MHz receiver module. ESP32 supports interrupts on almost any GPIO, so you can choose a different pin if needed.
+#define pinLed 3
 
 RCSwitch mySwitch = RCSwitch();
 
