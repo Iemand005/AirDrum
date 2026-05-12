@@ -42,8 +42,6 @@ VCC -> resistor 220 Ohm -> Arduino D3
 // Threshold for movement detection (tune as needed)
 const int threshold = 10;
 
-// Three-axis baseline values for resting position
-int16_t baseX, baseY, baseZ;
 
 /**
  * @brief Vector of 3 16bit integers
@@ -72,6 +70,9 @@ struct Vec3 {
     }
 };
 
+
+// Three-axis baseline values for resting position
+Vec3I16 baseAcceleration;
 Vec3 gyroBase, gyroLast;
 Vec3I16 lastPos{0,0,0};
 
@@ -187,10 +188,10 @@ void setup() {
     auto acceleration = readAccel();
     gyroBase = readGyro();
 
-    baseX = acceleration.x, baseY= acceleration.y, baseZ= acceleration.z;
-    Serial.print("Baseline - X: "); Serial.print(baseX);
-    Serial.print(" Y: "); Serial.print(baseY);
-    Serial.println(" Z: "); Serial.println(baseZ);
+    baseAcceleration = acceleration;
+    Serial.print("Baseline - X: "); Serial.print(baseAcceleration.x);
+    Serial.print(" Y: "); Serial.print(baseAcceleration.y);
+    Serial.println(" Z: "); Serial.println(baseAcceleration.z);
 
     Serial.println("Setup complete");
 
@@ -209,12 +210,13 @@ void setup() {
 void loop() {
 
     // Reaad accel data
-    auto currentPos = readAccel();
+    auto currentAccel = readAccel();
+    auto lowPassedAccel = lowPassFilter(currentAccel);
     
     // Calculate difference from baseline
-    int16_t dx = currentPos.x - lastPos.x;
-    int16_t dy = currentPos.y - lastPos.y;
-    int16_t dz = currentPos.z - lastPos.z;
+    int16_t dx = currentAccel.x - lastPos.x;
+    int16_t dy = currentAccel.y - lastPos.y;
+    int16_t dz = currentAccel.z - lastPos.z;
 
     
     // Use sum of absolute differences as movement magnitude
@@ -236,7 +238,12 @@ void loop() {
         auto rotation = readGyro();
         Serial.print("Gyro - X: "); Serial.print(rotation.x);
         Serial.print(" Y: "); Serial.print(rotation.y);
-        Serial.println(" Z: "); Serial.println(rotation.z);
+        Serial.print(" Z: "); Serial.println(rotation.z);
+
+        Serial.println("LowPassAccel:");
+        Serial.print("X: "); Serial.print(lowPassedAccel.x);
+        Serial.print(" Y: "); Serial.print(lowPassedAccel.y);
+        Serial.print(" Z: "); Serial.println(lowPassedAccel.z);
     } else {
         digitalWrite(pinLed, LOW);
     }
