@@ -32,10 +32,11 @@ VCC -> resistor 220 Ohm -> Arduino D3
 // MPU-9265 I2C address
 #define MPU_ADDR 0x68
 
-// MPU-9265 registers
+// MPU-9265 registers (See MPU-9250-Register-Map documentation page 8)
 #define REG_PWR_MGMT_1 0x6B
 #define REG_ACCEL_CONFIG 0x1C
 #define REG_ACCEL_XOUT_H 0x3B
+#define GYRO_XOUT_H 0x43
 #define REG_WHO_AM_I 0x75
 
 // Threshold for movement detection (tune as needed)
@@ -49,6 +50,13 @@ int16_t baseX, baseY, baseZ;
  */
 struct Vec3I16 {
     int16_t x, y, z;
+};
+
+/**
+ * @brief Vector of 3 floats
+ */
+struct Vec3 {
+    float x, y, z;
 };
 
 Vec3I16 lastPos{0,0,0};
@@ -78,58 +86,39 @@ Vec3I16 readAccel() {
     Wire.requestFrom(MPU_ADDR, 6);
 
     // MPU-9265 data is big-endian (high byte first)
-    Vec3I16 pos;
-    pos.x = (Wire.read() << 8) | Wire.read();
-    pos.y = (Wire.read() << 8) | Wire.read();
-    pos.z = (Wire.read() << 8) | Wire.read();
-    return pos;
+    Vec3I16 acceleration;
+    acceleration.x = (Wire.read() << 8) | Wire.read();
+    acceleration.y = (Wire.read() << 8) | Wire.read();
+    acceleration.z = (Wire.read() << 8) | Wire.read();
+    return acceleration;
 }
 
 
 /**
- * @brief Read gyroscope data from the MPU-9265 and return it as three 16-bit integers of degrees per second
+ * @brief Read gyroscope data from the MPU-9265 and return it as three floats of degrees per second
  * 
  * @returns Vector of acceleration
  */
-Vec3I16 readGyro() {
+Vec3 readGyro() {
     Wire.beginTransmission(MPU_ADDR);
-    Wire.write(0x43); 
+    Wire.write(GYRO_XOUT_H);
     Wire.endTransmission(false);
     
     // Request 6 bytes (2 bytes for each axis: X, Y, Z)
     Wire.requestFrom(MPU_ADDR, 6, true);
     
-    Vec3I16 gyro;
-    gyro.x = (Wire.read() << 8) | Wire.read(); 
-    gyro.y = (Wire.read() << 8) | Wire.read(); 
-    gyro.z = (Wire.read() << 8) | Wire.read(); 
+    Vec3I16 gyroRaw;
+    gyroRaw.x = (Wire.read() << 8) | Wire.read(); 
+    gyroRaw.y = (Wire.read() << 8) | Wire.read(); 
+    gyroRaw.z = (Wire.read() << 8) | Wire.read(); 
 
     // Convert to degrees per second (dps)
-    float dpsX = gyro.x / 131.0;
-    float dpsY = gyro.y / 131.0;
-    float dpsZ = gyro.z / 131.0;
+    Vec3 dps;
+    dps.x = gyroRaw.x / 131.0;
+    dps.y = gyroRaw.y / 131.0;
+    dps.z = gyroRaw.z / 131.0;
 
-
-}
-
-
-/**
- * @brief Read accelerometer data from the MPU-9265 and return it as three 16-bit integers
- * 
- * @returns Vector of acceleration
- */
-Vec3I16 readAccel() {
-    Wire.beginTransmission(MPU_ADDR);
-    Wire.write(REG_ACCEL_XOUT_H);
-    Wire.endTransmission(false);
-    Wire.requestFrom(MPU_ADDR, 6);
-
-    // MPU-9265 data is big-endian (high byte first)
-    Vec3I16 pos;
-    pos.x = (Wire.read() << 8) | Wire.read();
-    pos.y = (Wire.read() << 8) | Wire.read();
-    pos.z = (Wire.read() << 8) | Wire.read();
-    return pos;
+    return dps;
 }
 
 // Transmitter code
@@ -161,8 +150,10 @@ void setup() {
     delay(100);
 
     // Read baseline (resting position)
-    auto pos = readAccel();
-    baseX = pos.x, baseY= pos.y, baseZ= pos.z;
+    auto acceleration = readAccel();
+    auto rotation = readGyro();
+
+    baseX = acceleration.x, baseY= acceleration.y, baseZ= acceleration.z;
     Serial.print("Baseline - X: "); Serial.print(baseX);
     Serial.print(" Y: "); Serial.print(baseY);
     Serial.println(" Z: "); Serial.println(baseZ);
