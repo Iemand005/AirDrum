@@ -212,6 +212,11 @@ void loop() {
         analogWrite(pinLed, 10);
         Serial.print("Movement detected! Magnitude: ");
         Serial.println(magnitude);
+
+        auto rotation = readGyro();
+        Serial.print("Gyro - X: "); Serial.print(rotation.x);
+        Serial.print(" Y: "); Serial.print(rotation.y);
+        Serial.println(" Z: "); Serial.println(rotation.z);
     } else {
         digitalWrite(pinLed, LOW);
     }
@@ -229,6 +234,8 @@ void loop() {
 
         code++;
         mySwitch.send(code, 24);
+
+
         
     } else if (digitalReadButton == LOW && isButtonPressed) {
         isButtonPressed = false;
