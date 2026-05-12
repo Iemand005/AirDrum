@@ -59,6 +59,7 @@ struct Vec3 {
     float x, y, z;
 };
 
+Vec3 gyroBase, gyroLast;
 Vec3I16 lastPos{0,0,0};
 
 /**
