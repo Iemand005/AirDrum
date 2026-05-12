@@ -49,8 +49,12 @@ const int threshold = 10;
 struct Vec3I16 {
     int16_t x, y, z;
 
-    void normalize() {
-
+    Vec3I16 operator-(const Vec3I16& other) const {
+        Vec3I16 result;
+        result.x = this->x - other.x;
+        result.y = this->y - other.y;
+        result.z = this->z - other.z;
+        return result;
     }
 };
 
@@ -106,6 +110,16 @@ Vec3I16 readAccel() {
     acceleration.y = (Wire.read() << 8) | Wire.read();
     acceleration.z = (Wire.read() << 8) | Wire.read();
     return acceleration;
+}
+
+Vec3I16 readLinearAccel() {
+    Vec3I16 raw = readAccel();
+
+    Vec3I16 linearAccel;
+    linearAccel.x = raw.x - baseAcceleration.x;
+    linearAccel.y = raw.y - baseAcceleration.y;
+    linearAccel.z = raw.z - baseAcceleration.z;
+    return linearAccel;
 }
 
 
