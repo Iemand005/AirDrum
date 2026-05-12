@@ -159,8 +159,8 @@ Vec3 readGyro() {
 
 // TODO move to ashared thing
 
-void sendAccelerometerData() {
-
+void sendAccelerometerData(Vec3I16 accel) {
+    mySwitch.send((char*)&accel, sizeof(Vec3I16));
 }
 
 
