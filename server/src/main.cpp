@@ -165,7 +165,7 @@ enum AccelerometerAxis : uint8_t {
     AccelPacketZ = 3
 };
 
-struct AccelReportPacket : long {
+struct AccelReportPacket {
     uint8_t id = 69;
     AccelerometerAxis axis;
     Vec3I16 acceleration;
