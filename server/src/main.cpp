@@ -185,9 +185,9 @@ void sendAccelerometerData(Vec3I16 accel) {
     AccelReportPacket packet;
     packet.axis = AccelPacketX;
     packet.acceleration = accel;
-    const char *buffer = (char*)&packet;
+    unsigned int buffer = packet;
     
-    mySwitch.send(buffer, sizeof(packet));
+    mySwitch.send(unsigned int, sizeof(packet));
 }
 
 
