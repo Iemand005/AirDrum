@@ -52,7 +52,7 @@ struct Vec3I16 {
     int16_t x, y, z;
 
     void normalize() {
-        
+
     }
 };
 
@@ -61,6 +61,15 @@ struct Vec3I16 {
  */
 struct Vec3 {
     float x, y, z;
+
+    void normalize() {
+        // float length = std::sqrt(x * x + y * y + z * z);
+        if (length > 0.0f) {
+            x /= length;
+            y /= length;
+            z /= length;
+        }
+    }
 };
 
 Vec3 gyroBase, gyroLast;
