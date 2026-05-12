@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include <RCSwitch.h>
 #include <Wire.h>
+#include <Math.h>
 
 
 // Accelerometer reader
@@ -77,6 +78,27 @@ Vec3I16 baseAcceleration;
 Vec3 gyroBase, gyroLast;
 Vec3I16 lastPos{0,0,0};
 
+
+// Low pass filter for accelerometer data to take out the garvity acceleration
+
+Vec3 filterState = { 0.0f, 0.0f, 16384.0f };
+
+// Filter coefficient
+const float ALPHA = 0.15f; 
+
+Vec3I16 lowPassFilter(Vec3I16 raw) {
+    filterState.x = (raw.x * ALPHA) + (filterState.x * (1.0f - ALPHA));
+    filterState.y = (raw.y * ALPHA) + (filterState.y * (1.0f - ALPHA));
+    filterState.z = (raw.z * ALPHA) + (filterState.z * (1.0f - ALPHA));
+
+    Vec3I16 smoothed;
+    smoothed.x = (int16_t)filterState.x;
+    smoothed.y = (int16_t)filterState.y;
+    smoothed.z = (int16_t)filterState.z;
+
+    return smoothed;
+}
+
 /**
  * @brief Write a byte to a specific register on the MPU-9265
  * 
@@ -144,25 +166,7 @@ Vec3 readGyro() {
     return dps;
 }
 
-// Low pass filter for accelerometer data to take out the garvity acceleration
 
-Vec3 filterState = { 0.0f, 0.0f, 16384.0f };
-
-// Filter coefficient
-const float ALPHA = 0.15f; 
-
-Vec3I16 lowPassFilter(Vec3I16 raw) {
-    filterState.x = (raw.x * ALPHA) + (filterState.x * (1.0f - ALPHA));
-    filterState.y = (raw.y * ALPHA) + (filterState.y * (1.0f - ALPHA));
-    filterState.z = (raw.z * ALPHA) + (filterState.z * (1.0f - ALPHA));
-
-    Vec3I16 smoothed;
-    smoothed.x = (int16_t)filterState.x;
-    smoothed.y = (int16_t)filterState.y;
-    smoothed.z = (int16_t)filterState.z;
-
-    return smoothed;
-}
 
 // Transmitter code
 
