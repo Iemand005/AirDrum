@@ -70,6 +70,16 @@ Vec3 gyroBase, gyroLast;
 Vec3I16 lastPos{0,0,0};
 
 
+
+// Transmitter variables
+
+RCSwitch mySwitch = RCSwitch();
+
+int code = 0;
+bool isButtonPressed = false;
+
+
+
 // Low pass filter for accelerometer data to take out the garvity acceleration
 
 Vec3 filterState = { 0.0f, 0.0f, 16384.0f };
@@ -183,12 +193,6 @@ void sendAccelerometerData(Vec3I16 accel) {
 
 // Transmitter code
 
-
-
-RCSwitch mySwitch = RCSwitch();
-
-int code = 0;
-bool isButtonPressed = false;
 
 void setup() {
 
