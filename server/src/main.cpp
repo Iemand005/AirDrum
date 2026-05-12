@@ -41,7 +41,7 @@ VCC -> resistor 220 Ohm -> Arduino D3
 #define REG_WHO_AM_I 0x75
 
 // Threshold for movement detection (tune as needed)
-const int threshold = 10;
+const int threshold = 2000;
 
 const bool applyLowPassFilter = true;
 
@@ -232,12 +232,12 @@ void loop() {
     magnitude -= 700;
     magnitude /= 10;
 
-    if (magnitude > 255) magnitude = 255;
-    if (magnitude < 0) magnitude = 0;
+    // if (magnitude > 255) magnitude = 255;
+    // if (magnitude < 0) magnitude = 0;
     
     if (magnitude > threshold) {
-        // digitalWrite(pinLed, HIGH);
-        analogWrite(pinLed, 10);
+        digitalWrite(pinLed, HIGH);
+        // analogWrite(pinLed, 10);
         Serial.print("Movement detected! Magnitude: ");
         Serial.println(magnitude);
 
