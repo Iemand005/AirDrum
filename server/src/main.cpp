@@ -64,11 +64,11 @@ struct Vec3 {
 
     void normalize() {
         // float length = std::sqrt(x * x + y * y + z * z);
-        if (length > 0.0f) {
-            x /= length;
-            y /= length;
-            z /= length;
-        }
+        // if (length > 0.0f) {
+        //     x /= length;
+        //     y /= length;
+        //     z /= length;
+        // }
     }
 };
 
