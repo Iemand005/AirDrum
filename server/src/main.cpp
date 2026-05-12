@@ -50,7 +50,7 @@ struct Vec3I16 {
     int16_t x, y, z;
 
     Vec3I16 operator-(const Vec3I16& other) const {
-        return {this->x - other.x, this->y - other.y, this->z - other.z};
+        return {x - other.x, y - other.y, z - other.z};
     }
 };
 
