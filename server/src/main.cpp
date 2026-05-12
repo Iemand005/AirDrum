@@ -17,11 +17,16 @@ SCL       A5
 WPI469T   Arduino Nano
 VCC       3.3V
 GND       GND
-SIG       D2?
+SIG       D4
+*/
+
+/*
+LED     Arduino
+VCC -> resistor 220 Ohm -> Arduino D3
 */
 
 #define pinButton 5
-#define pinLed 4
+#define pinLed 3
 #define pinTransmitter 2
 
 // MPU-9265 I2C address
@@ -85,9 +90,11 @@ void setup() {
     // Accelerometer init
 
     Serial.begin(115200);
-    Serial.println("Starting MPU-9265 accelerometer example...");
+    Serial.println("Starting MPU-9265 accelerometer...");
 
     pinMode(pinLed, OUTPUT);
+    pinMode(pinButton, INPUT_PULLUP);
+
     Wire.begin();
 
     // Wake up MPU-9265 (clear sleep bit)
@@ -108,9 +115,8 @@ void setup() {
     // Server init
 
     // Serial.begin(115200);
-    Serial.println("Starting server...");
+    Serial.println("Starting Wadda server...");
 
-    pinMode(pinButton, INPUT_PULLUP);
     pinMode(pinLed, OUTPUT);
 
     mySwitch.enableTransmit(pinTransmitter);
