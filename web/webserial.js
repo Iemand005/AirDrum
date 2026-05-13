@@ -17,7 +17,29 @@ navigator.serial.getPorts().then((ports) => {
   console.log("gor ports", ports)
 });
 
-async function startReadingLines(port) {
+function playBeep(frequency = 440, duration = 200) {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    
+    const oscillator = audioCtx.createOscillator();
+    
+    const gainNode = audioCtx.createGain();
+
+    oscillator.connect(gainNode);
+    gainNode.connect(audioCtx.destination);
+
+    oscillator.type = 'sine';
+    oscillator.frequency.value = frequency;
+
+    gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration / 1000);
+
+    oscillator.start(audioCtx.currentTime);
+    oscillator.stop(audioCtx.currentTime + duration / 1000);
+}
+
+async function startReadingLines(port, callback) {
+
+  console.log("port reached here!", port)
   let buffer = "";
 
   while (port.readable) {
@@ -46,8 +68,8 @@ async function startReadingLines(port) {
   }
 }
 
-function uh() {
-  navigator.serial.requestPort({ filters: [{ usbVendorId }] }).then(port => port.open({ baudRate }).then(startReadingLines)).catch(e => console.warn("User did not select a port or something", e));
+function uh(callback) {
+  navigator.serial.requestPort({ filters: [{ usbVendorId }] }).then(port => port.open({ baudRate }).then(_ => startReadingLines(port, callback))).catch(e => console.warn("User did not select a port or something", e));
 }
 
 function startListening() {
