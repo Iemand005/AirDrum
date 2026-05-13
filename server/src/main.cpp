@@ -4,7 +4,7 @@
 // #include <Math.h>
 #include <AirDrumServer.h>
 #include <WiFiCredentials.h>
-#include "../lib/WhaddaWhaddaServer.h"
+#include "../lib/WhaddaServer.h"
 
 
 // Accelerometer reader
