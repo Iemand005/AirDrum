@@ -44,7 +44,8 @@ VCC -> resistor 220 Ohm -> Arduino D3
 const int threshold = 1;
 
 const int gyroXdiff = 20;
-const int gyroXThreshold = 2000;
+const int gyroXThreshold = 20000;
+const int gyroXIgnoreBelow = 20;
 const int gyroXCancel = -5;
 int gyroXSum = 0;
 
@@ -265,22 +266,26 @@ void loop() {
         // Serial.print(" Y: "); Serial.print(lowPassedAccel.y);
         // Serial.print(" Z: "); Serial.println(lowPassedAccel.z);
 
-        Serial.print("Gyro X Sum: "); Serial.println(gyroXSum);
+        if (abs(rotation.x) > gyroXIgnoreBelow) {
 
-        // if (rotation.x > )
-        if (rotation.x < gyroXCancel) {
-            gyroXSum = 0;
-            mySwitch.send(67, 24);
+            Serial.print("Gyro X Sum: "); Serial.println(gyroXSum);
+
+            // if (rotation.x > )
+            if (rotation.x < gyroXCancel) {
+                gyroXSum = 0;
+                mySwitch.send(67, 24);
+            }
+
+            gyroXSum += rotation.x;
+
+            if (gyroXSum > gyroXThreshold) {
+                Serial.println("MEIW!");
+                mySwitch.send(69, 24);
+                gyroXSum = 0;
+            }
+        } else {
+            Serial.println("Didn't rotate enough. Ignoring...");
         }
-
-        gyroXSum += rotation.x;
-
-        if (gyroXSum > gyroXThreshold) {
-            Serial.println("MEIW!");
-            mySwitch.send(69, 24);
-            gyroXSum = 0;
-        }
-
 
         // code++;
         // mySwitch.send(code, 24);
