@@ -17,37 +17,37 @@ navigator.serial.getPorts().then((ports) => {
   console.log("gor ports", ports)
 });
 
-function uh() {
-  navigator.serial.requestPort({ filters: [{ usbVendorId }] }).then(async port => {
-    await port.open({ baudRate });
+async function startReadingLines() {
+  let buffer = "";
 
-    let buffer = "";
+  while (port.readable) {
+    const textDecoderStream = new TextDecoderStream();
+    port.readable.pipeTo(textDecoderStream.writable);
+    const reader = textDecoderStream.readable.getReader();
 
-    while (port.readable) {
-      const textDecoderStream = new TextDecoderStream();
-      port.readable.pipeTo(textDecoderStream.writable);
-      const reader = textDecoderStream.readable.getReader();
+    try {
+      while (true) {
+        const { value, done } = await reader.read();
+        if (done) break;
 
-      try {
-        while (true) {
-          const { value, done } = await reader.read();
-          if (done) break;
+        buffer += value;
+        const lines = buffer.split("\n");
+        buffer = lines.pop();
 
-          buffer += value;
-          const lines = buffer.split("\n");
-          buffer = lines.pop();
-
-          for (const line of lines) {
-            callback(line);
-          }
+        for (const line of lines) {
+          callback(line);
         }
-      } catch (error) {
-        console.error(error);
-      } finally {
-        reader.releaseLock();
       }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      reader.releaseLock();
     }
-  }).catch((e) => console.warn("User did not select a port or something", e));
+  }
+}
+
+function uh() {
+  navigator.serial.requestPort({ filters: [{ usbVendorId }] }).then(port => port.open({ baudRate }).then(startReadingLines)).catch((e) => console.warn("User did not select a port or something", e));
 }
 
 function startListening() {
