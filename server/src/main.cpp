@@ -55,6 +55,10 @@ const int gyroXCancel = -5;
 int gyroXSum = 0;
 bool hasHit = true;
 
+bool moving = false;
+int stopMovingThreshold = 3;
+
+
 const bool applyLowPassFilter = true;
 
 #define USE_WIFI
@@ -259,6 +263,7 @@ void loop() {
     magnitude /= 10;
     
     if (magnitude > threshold) {
+        moving = true;
         digitalWrite(pinLed, HIGH);
         // analogWrite(pinLed, 10);
         Serial.print("Movement detected! Magnitude: ");
