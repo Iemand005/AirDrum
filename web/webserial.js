@@ -30,22 +30,26 @@ button.addEventListener("click", () => {
       await port.open({ baudRate });
 
       while (port.readable) {
-        const reader = port.readable.getReader();
+        const lineStream = port.readable
+          .pipeThrough(new TextDecoderStream())
+          .pipeThrough(new TransformStream(new TextLineStreamTransformer()));
+
+        const reader = lineStream.getReader();
+
         try {
           while (true) {
             const { value, done } = await reader.read();
             if (done) {
-              // |reader| has been canceled.
               break;
             }
-            // Do something with |value|...
-            // console.log("", value);
-
-            const data = new TextDecoder().decode(value);
-            console.log(data);
+            
+            const trimmedLine = value.trim();
+            if (trimmedLine.length > 0) {
+              parseData(trimmedLine);
+            }
           }
         } catch (error) {
-          // Handle |error|...
+          console.error("Read error:", error);
         } finally {
           reader.releaseLock();
         }
