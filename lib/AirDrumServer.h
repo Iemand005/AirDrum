@@ -6,6 +6,8 @@
 #include <WiFi.h>
 
 #include "SocketServer.h"
+// #inlcude 
+#include "WhaddaServer.h"
 
 class AirDrumServer : public WebSocketServer, public WhaddaServer {
 
