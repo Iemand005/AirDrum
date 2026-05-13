@@ -45,7 +45,7 @@ void loop() {
     if (mySwitch.available()) {
         unsigned long receivedCode = mySwitch.getReceivedValue();
 
-        long code = receivedCode / 1000;
+        unsigned long code = receivedCode / 1000;
         int value = receivedCode % 1000;
 
         if (receivedCode == 0) {
@@ -54,7 +54,7 @@ void loop() {
           ledStatus = !ledStatus;  // Toggle LED status on each received code
             Serial.print("Received code: ");
             Serial.print(code);
-            Serial.print("Value: ");
+            Serial.print(" Value: ");
             Serial.print(value);
             Serial.print(" / bitlength: ");
             Serial.print(mySwitch.getReceivedBitlength());
