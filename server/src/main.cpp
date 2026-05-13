@@ -44,7 +44,7 @@ VCC -> resistor 220 Ohm -> Arduino D3
 const int threshold = 1;
 
 const int gyroXdiff = 20;
-const int gyroXThreshold = 2000;
+const int gyroXThreshold = 1000;
 const int gyroXIgnoreBelow = 20;
 const int gyroXCancel = -5;
 int gyroXSum = 0;
@@ -287,7 +287,7 @@ void loop() {
 
             if (gyroXSum > gyroXThreshold) {
                 Serial.println("MEIW!");
-                
+
                 int value = 69;
 
                 // int combined = (code * 1000) + 69;
