@@ -29,6 +29,8 @@ VCC -> resistor 220 Ohm -> Arduino D3
 #define pinButton 5
 #define pinLed 2 // Set to 3 for arduino
 #define pinTransmitter 4
+
+
 #define transmitRepeat 3
 
 // MPU-9265 I2C address
