@@ -26,6 +26,25 @@ button.addEventListener("click", () => {
     .then(async port => {
       // port
       await port.open({ baudRate: 9600 });
+
+      while (port.readable) {
+        const reader = port.readable.getReader();
+        try {
+          while (true) {
+            const { value, done } = await reader.read();
+            if (done) {
+              // |reader| has been canceled.
+              break;
+            }
+            // Do something with |value|...
+            console.log("", value);
+          }
+        } catch (error) {
+          // Handle |error|...
+        } finally {
+          reader.releaseLock();
+        }
+      }
       // Connect to `port` or add it to the list of available ports.
     })
     .catch((e) => {
