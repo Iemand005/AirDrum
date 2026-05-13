@@ -7,12 +7,12 @@
 
 #include "SocketServer.h"
 
-class AirDrumServer : public SocketServer {
+class AirDrumServer : public SocketServer, public WhaddaServer {
 
 public:
 
   AirDrumServer() : SocketServer() {
-    
+
   }
 
   void disableWiFi() {
