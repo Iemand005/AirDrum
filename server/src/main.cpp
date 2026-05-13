@@ -56,8 +56,8 @@ int gyroXSum = 0;
 bool hasHit = true;
 
 bool moving = false;
-int stopMovingThreshold = 3;
-
+const int stopMovingThreshold = 3;
+int moveTriggerCount = 0;
 
 const bool applyLowPassFilter = true;
 
@@ -264,6 +264,7 @@ void loop() {
     
     if (magnitude > threshold) {
         moving = true;
+        moveTriggerCount++;
         digitalWrite(pinLed, HIGH);
         // analogWrite(pinLed, 10);
         Serial.print("Movement detected! Magnitude: ");
