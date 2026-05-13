@@ -98,6 +98,14 @@ Vec3I16 lastAccel{0,0,0};
 RCSwitch mySwitch = RCSwitch();
 
 int code = 0;
+
+void sendValue(int value) {
+    unsigned long combined = (code << 8) | value;
+
+    mySwitch.send(combined, 24);
+    code++;
+}
+
 bool isButtonPressed = false;
 
 
@@ -263,6 +271,13 @@ void loop() {
     magnitude /= 10;
     
     if (magnitude > threshold) {
+
+        if (!moving) {
+            Serial.println("I started moving!  I'll report it this time...... ypu");
+
+
+        }
+
         moving = true;
         // stillMomentCount++;
         // digitalWrite(pinLed, HIGH);
@@ -282,10 +297,11 @@ void loop() {
             if (rotation.x < gyroXCancel && gyroXSum > 500) {
                 gyroXSum = 0;
                 
-                int value = 67;
-                unsigned long combined = (code << 8) | value;
-                mySwitch.send(combined, 24);
-                code++;
+                // int value = 67;
+                sendValue(67);
+                // unsigned long combined = (code << 8) | value;
+                // mySwitch.send(combined, 24);
+                // code++;
 
             }
 
@@ -297,14 +313,14 @@ void loop() {
                 hasHit = true;
                 Serial.println("MEIW!");
 
-                int value = 69;
-
+                // int value = 69;
+                sendValue(69);
                 // int combined = (code * 1000) + 69;
-                unsigned long combined = (code << 8) | value;
+                // unsigned long combined = (code << 8) | value;
 
 
-                mySwitch.send(combined, 24);
-                code++;
+                // mySwitch.send(combined, 24);
+                // code++;
                 gyroXSum = 0;
             }
         } else {
