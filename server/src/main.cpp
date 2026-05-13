@@ -52,6 +52,7 @@ const int gyroXThreshold = 1500;
 const int gyroXIgnoreBelow = 20;
 const int gyroXCancel = -5;
 int gyroXSum = 0;
+bool hasHit = true;
 
 const bool applyLowPassFilter = true;
 
@@ -272,6 +273,8 @@ void loop() {
         // Serial.print(" Y: "); Serial.print(lowPassedAccel.y);
         // Serial.print(" Z: "); Serial.println(lowPassedAccel.z);
 
+        if (rotation.x < 0) hasHit = false;
+
         if (abs(rotation.x) > gyroXIgnoreBelow) {
 
             Serial.print("Gyro X Sum: "); Serial.println(gyroXSum);
@@ -290,7 +293,9 @@ void loop() {
             gyroXSum += rotation.x;
             if (gyroXSum < 0) gyroXSum = 0;
 
-            if (gyroXSum > gyroXThreshold) {
+            if (!hasHit && gyroXSum > gyroXThreshold) {
+                // if () 
+                hasHit = true;
                 Serial.println("MEIW!");
 
                 int value = 69;
