@@ -50,8 +50,10 @@ function uh() {
   }).catch((e) => console.warn("User did not select a port or something", e));
 }
 
-button.addEventListener("click", uh);
-
-function callback(data) {
-  console.log(data);
+function startListening() {
+  uh(data => {
+    console.log("Receied line:", data);
+  })
 }
+
+button.addEventListener("click", startListening);
