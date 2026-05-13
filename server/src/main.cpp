@@ -45,6 +45,7 @@ const int threshold = 1;
 
 const int gyroXdiff = 20;
 const int gyroXThreshold = 2000;
+const int gyroXCancel = -5;
 int gyroXSum = 0;
 
 const bool applyLowPassFilter = true;
@@ -265,12 +266,15 @@ void loop() {
         Serial.print(" Z: "); Serial.println(lowPassedAccel.z);
 
         // if (rotation.x > )
+        if (rotation.x < -5)
+
         gyroXSum += rotation.x;
 
         if (gyroXSum > gyroXThreshold) {
             Serial.println("MEIW!");
             mySwitch.send(69, 24);
         }
+
 
         // code++;
         // mySwitch.send(code, 24);
