@@ -43,6 +43,8 @@ VCC -> resistor 220 Ohm -> Arduino D3
 // Threshold for movement detection (tune as needed)
 const int threshold = 1;
 
+const int gyroXdiff = 20;
+
 const bool applyLowPassFilter = true;
 
 /**
@@ -260,8 +262,10 @@ void loop() {
         Serial.print(" Y: "); Serial.print(lowPassedAccel.y);
         Serial.print(" Z: "); Serial.println(lowPassedAccel.z);
 
-        code++;
-        mySwitch.send(code, 24);
+        if (rotation.x > )
+
+        // code++;
+        // mySwitch.send(code, 24);
     } else {
         digitalWrite(pinLed, LOW);
     }
@@ -289,5 +293,5 @@ void loop() {
         digitalWrite(pinLed, LOW);
     }
 
-    delay(100);
+    delay(10);
 }
