@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <RCSwitch.h>
 
-#include <Adafruit_SH1106.h>
+// #include <Adafruit_SH1106.h>
 #include <Wire.h>
 
 #define i2C_ADDRESS 0x3C
@@ -9,7 +9,7 @@
 #define pinReceiver 2 // GPIO pin connected to the data pin of the 433MHz receiver module. ESP32 supports interrupts on almost any GPIO, so you can choose a different pin if needed.
 #define pinLed 3
 
-Adafruit_SH1106 display;
+// Adafruit_SH1106 display;
 
 // Radio stuff
 RCSwitch mySwitch = RCSwitch();
@@ -29,13 +29,13 @@ void setup() {
 
     Serial.println("Setup complete");
 
-    display.begin(SH1106_SWITCHCAPVCC, i2C_ADDRESS);
-    display.clearDisplay();
-    display.setTextSize(1);
-    display.setTextColor(WHITE);
-    display.setCursor(0, 10);
-    display.println("Meow");
-    display.display();
+    // display.begin(SH1106_SWITCHCAPVCC, i2C_ADDRESS);
+    // display.clearDisplay();
+    // display.setTextSize(1);
+    // display.setTextColor(WHITE);
+    // display.setCursor(0, 10);
+    // display.println("Meow");
+    // display.display();
 }
 
 void loop() {
