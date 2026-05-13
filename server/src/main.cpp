@@ -41,7 +41,7 @@ VCC -> resistor 220 Ohm -> Arduino D3
 #define REG_WHO_AM_I 0x75
 
 // Threshold for movement detection (tune as needed)
-const int threshold = 2300;
+const int threshold = 1000;
 
 const bool applyLowPassFilter = true;
 
@@ -67,7 +67,7 @@ struct Vec3 {
 // Three-axis baseline values for resting position
 Vec3I16 baseAcceleration;
 Vec3 gyroBase, gyroLast;
-Vec3I16 lastPos{0,0,0};
+Vec3I16 lastAccel{0,0,0};
 
 
 
@@ -220,9 +220,11 @@ void loop() {
     auto lowPassedAccel = lowPassFilter(currentAccel);
     
     // Calculate difference from baseline
-    int16_t dx = currentAccel.x - lastPos.x;
-    int16_t dy = currentAccel.y - lastPos.y;
-    int16_t dz = currentAccel.z - lastPos.z;
+    int16_t dx = currentAccel.x - lastAccel.x;
+    int16_t dy = currentAccel.y - lastAccel.y;
+    int16_t dz = currentAccel.z - lastAccel.z;
+
+    lastAccel = currentAccel;
 
     
     // Use sum of absolute differences as movement magnitude
