@@ -273,7 +273,11 @@ void loop() {
             // if (rotation.x > )
             if (rotation.x < gyroXCancel && gyroXSum > 500) {
                 gyroXSum = 0;
-                mySwitch.send(67, 24);
+                // INT COM
+                int combined = (code * 1000) + 67;
+                mySwitch.send(combined, 24);
+                code++;
+
             }
 
             gyroXSum += rotation.x;
@@ -281,7 +285,10 @@ void loop() {
 
             if (gyroXSum > gyroXThreshold) {
                 Serial.println("MEIW!");
-                mySwitch.send(69, 24);
+                int combined = (code * 1000) + 69;
+
+                mySwitch.send(combined, 24);
+                code++;
                 gyroXSum = 0;
             }
         } else {
