@@ -81,7 +81,7 @@ function startListening() {
     var splits = data.split(" ");
     const code = splits[2];
     if (code == lastCode) return console.log("Skippfk");
-    const val = splits[2];
+    const val = splits[4];
 
     console.log("code!!!: ", code, val);
 

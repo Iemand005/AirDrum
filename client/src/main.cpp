@@ -53,14 +53,16 @@ void loop() {
         // unsigned long code = receivedCode / 1000;
         // int value = receivedCode % 1000;
 
-        int code = receivedCode >> 4;
+        // int code = receivedCode >> 4;
+        unsigned long code = receivedCode >> 7;
 
         if (lastCode == code) {
             Serial.println("Already had this code.. skppinngggg. skip");
             return;
         }
 
-        int value = receivedCode & 0x0F;
+        // int value = receivedCode & 0x0F;
+        byte value = receivedCode & 0x7F;
 
         if (receivedCode == 0) {
             Serial.println("Unknown encoding");
