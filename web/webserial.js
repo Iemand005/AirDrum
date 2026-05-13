@@ -79,6 +79,8 @@ function startListening() {
     console.log("Receied line:", data);
     // ok i wanna now check if it's a drum sound and play
     var splits = data.split(" ");
+    if (splits[0] == "Received") console.log("This is a received packet");
+    else return;
     const code = splits[2];
     if (code == lastCode) return console.log("Skippfk");
     lastCode = code;
