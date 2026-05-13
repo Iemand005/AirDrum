@@ -236,15 +236,10 @@ void loop() {
     auto currentAccel = readLinearAccel();
     auto lowPassedAccel = lowPassFilter(currentAccel);
     
-    // Calculate difference from baseline
-    int16_t dx = currentAccel.x - lastAccel.x;
-    int16_t dy = currentAccel.y - lastAccel.y;
-    int16_t dz = currentAccel.z - lastAccel.z;
 
     auto jerk = currentAccel - lastAccel;
-
     lastAccel = currentAccel;
-    
+
     int magnitude = jerk.magnitude();
 
     magnitude -= 100;
@@ -257,14 +252,6 @@ void loop() {
         Serial.println(magnitude);
 
         auto rotation = readGyro();
-        // Serial.print("Gyro - X: "); Serial.print(rotation.x);
-        // Serial.print(" Y: "); Serial.print(rotation.y);
-        // Serial.print(" Z: "); Serial.println(rotation.z);
-
-        // Serial.println("LowPassAccel:");
-        // Serial.print("X: "); Serial.print(lowPassedAccel.x);
-        // Serial.print(" Y: "); Serial.print(lowPassedAccel.y);
-        // Serial.print(" Z: "); Serial.println(lowPassedAccel.z);
 
         if (rotation.x < 0) hasHit = false;
 
