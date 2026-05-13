@@ -1,5 +1,9 @@
 
-#ifndef OTAUpdateer_h
-#define OTAUpdateer_h
+#ifndef OTAUpdater_h
+#define OTAUpdater_h
+
+class OTAUpdater {
+
+};
 
 #endif
