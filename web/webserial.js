@@ -37,9 +37,9 @@ button.addEventListener("click", () => {
               break;
             }
             // Do something with |value|...
-            console.log("", value);
+            // console.log("", value);
 
-            // const data = new TextDecoder().decode(value);
+            const data = new TextDecoder().decode(value);
             console.log(data);
           }
         } catch (error) {
