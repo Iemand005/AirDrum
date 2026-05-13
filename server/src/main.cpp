@@ -44,7 +44,7 @@ VCC -> resistor 220 Ohm -> Arduino D3
 const int threshold = 1;
 
 const int gyroXdiff = 20;
-const int gyroXThreshold = 2000;
+const int gyroXThreshold = 200;
 const int gyroXCancel = -5;
 int gyroXSum = 0;
 
@@ -256,23 +256,29 @@ void loop() {
         Serial.println(magnitude);
 
         auto rotation = readGyro();
-        Serial.print("Gyro - X: "); Serial.print(rotation.x);
-        Serial.print(" Y: "); Serial.print(rotation.y);
-        Serial.print(" Z: "); Serial.println(rotation.z);
+        // Serial.print("Gyro - X: "); Serial.print(rotation.x);
+        // Serial.print(" Y: "); Serial.print(rotation.y);
+        // Serial.print(" Z: "); Serial.println(rotation.z);
 
-        Serial.println("LowPassAccel:");
-        Serial.print("X: "); Serial.print(lowPassedAccel.x);
-        Serial.print(" Y: "); Serial.print(lowPassedAccel.y);
-        Serial.print(" Z: "); Serial.println(lowPassedAccel.z);
+        // Serial.println("LowPassAccel:");
+        // Serial.print("X: "); Serial.print(lowPassedAccel.x);
+        // Serial.print(" Y: "); Serial.print(lowPassedAccel.y);
+        // Serial.print(" Z: "); Serial.println(lowPassedAccel.z);
+
+        Serial.print("Gyro X Sum: "); Serial.println(gyroXSum);
 
         // if (rotation.x > )
-        if (rotation.x < -5)
+        if (rotation.x < gyroXCancel) {
+            gyroXSum = 0;
+            mySwitch.send(67, 24);
+        }
 
         gyroXSum += rotation.x;
 
         if (gyroXSum > gyroXThreshold) {
             Serial.println("MEIW!");
             mySwitch.send(69, 24);
+            gyroXSum = 0;
         }
 
 
