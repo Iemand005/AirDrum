@@ -236,6 +236,8 @@ void setup() {
     // Wifi stuffs
 #ifdef USE_WIFI
     server.connectWiFi(SECRET_SSID, SECRET_PASS);
+
+    server.startListener();
 #endif
 
     Serial.println("Setup complete");
