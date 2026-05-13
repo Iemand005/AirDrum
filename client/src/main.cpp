@@ -48,8 +48,11 @@ void loop() {
         Serial.print("Rough code: ");
         Serial.println(receivedCode);
 
-        unsigned long code = receivedCode / 1000;
-        int value = receivedCode % 1000;
+        // unsigned long code = receivedCode / 1000;
+        // int value = receivedCode % 1000;
+
+        int code = receivedCode >> 4;
+        int value = receivedCode & 0x0F;
 
         if (receivedCode == 0) {
             Serial.println("Unknown encoding");
