@@ -249,7 +249,7 @@ void loop() {
     int magnitude = jerk.magnitude();
 
     // magnitude /= 100;
-    magnitude -= 700;
+    magnitude -= 500;
     magnitude /= 10;
 
     // if (magnitude > 255) magnitude = 255;
@@ -278,8 +278,7 @@ void loop() {
             // if (rotation.x > )
             if (rotation.x < gyroXCancel && gyroXSum > 500) {
                 gyroXSum = 0;
-                // INT COM
-                // int combined = (code * 1000) + 67;
+                
                 int value = 67;
                 unsigned long combined = (code << 8) | value;
                 mySwitch.send(combined, 24);
