@@ -3,6 +3,7 @@
 #include <Wire.h>
 // #include <Math.h>
 #include <AirDrumServer.h>
+#include <WiFiCredentials.h>
 
 
 // Accelerometer reader
@@ -55,6 +56,8 @@ int gyroXSum = 0;
 bool hasHit = true;
 
 const bool applyLowPassFilter = true;
+
+#define USE_WIFI
 
 /**
  * @brief Vector of 3 16bit integers
@@ -228,6 +231,12 @@ void setup() {
     mySwitch.enableTransmit(pinTransmitter);
 
     mySwitch.setRepeatTransmit(transmitRepeat);
+
+
+    // Wifi stuffs
+#ifdef USE_WIFI
+    server.connectWiFi(SECRET_SSID, SECRET_PASS);
+#endif
 
     Serial.println("Setup complete");
 }

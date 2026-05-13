@@ -6,6 +6,8 @@
 #include <WiFi.h>
 
 class AirDrumServer {
+
+public:
   void disableWiFi() {
     WiFi.disconnect(true); 
     WiFi.mode(WIFI_OFF);
