@@ -54,6 +54,10 @@ struct Vec3I16 {
     Vec3I16 operator-(const Vec3I16& other) const {
         return {x - other.x, y - other.y, z - other.z};
     }
+
+    int magnitude() {
+        return abs(x) + abs(y) + abs(z);
+    }
 };
 
 /**
@@ -224,11 +228,14 @@ void loop() {
     int16_t dy = currentAccel.y - lastAccel.y;
     int16_t dz = currentAccel.z - lastAccel.z;
 
+    auto jerk = currentAccel - lastAccel;
+
     lastAccel = currentAccel;
 
     
     // Use sum of absolute differences as movement magnitude
-    int magnitude = abs(dx) + abs(dy) + abs(dz);
+    // int magnitude = abs(dx) + abs(dy) + abs(dz);
+    int magnitude = jerk.magnitude();
 
     // magnitude /= 100;
     magnitude -= 700;
