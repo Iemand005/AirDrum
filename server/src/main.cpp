@@ -94,6 +94,8 @@ int code = 0;
 bool isButtonPressed = false;
 
 
+AirDrumServer server;
+
 
 // Low pass filter for accelerometer data to take out the garvity acceleration
 
