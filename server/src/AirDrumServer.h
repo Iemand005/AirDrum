@@ -7,11 +7,11 @@
 
 #include "SocketServer.h"
 
-class AirDrumServer : public SocketServer, public WhaddaServer {
+class AirDrumServer : public WebSocketServer, public WhaddaServer {
 
 public:
 
-  AirDrumServer() : SocketServer() {
+  AirDrumServer() : WebSocketServer() {
 
   }
 
