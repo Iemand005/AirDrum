@@ -2,6 +2,7 @@
 #include <RCSwitch.h>
 #include <Wire.h>
 // #include <Math.h>
+#include <AirDrumServer.h>
 
 
 // Accelerometer reader
