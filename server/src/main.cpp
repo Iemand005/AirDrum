@@ -47,7 +47,7 @@ VCC -> resistor 220 Ohm -> Arduino D3
 const int threshold = 1;
 
 const int gyroXdiff = 20;
-const int gyroXThreshold = 1000;
+const int gyroXThreshold = 1500;
 const int gyroXIgnoreBelow = 20;
 const int gyroXCancel = -5;
 int gyroXSum = 0;
