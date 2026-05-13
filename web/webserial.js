@@ -72,15 +72,21 @@ function uh(callback) {
   navigator.serial.requestPort({ filters: [{ usbVendorId }] }).then(port => port.open({ baudRate }).then(_ => startReadingLines(port, callback))).catch(e => console.warn("User did not select a port or something", e));
 }
 
+let lastCode = 0;
+
 function startListening() {
   uh(data => {
     console.log("Receied line:", data);
     // ok i wanna now check if it's a drum sound and play
     var splits = data.split(" ");
     const code = splits[2];
-    console.log("code!!!: ", code);
-    if (code === "67") playBeep(2000);
-    if (code === "69") playBeep(1000);
+    if (code == lastCode) return console.log("Skippfk");
+    const val = splits[2];
+
+    console.log("code!!!: ", code, val);
+
+    if (val === "67") playBeep(2000);
+    if (val === "69") playBeep(1000);
     
   })
 }
