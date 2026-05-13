@@ -277,6 +277,7 @@ void loop() {
             }
 
             gyroXSum += rotation.x;
+            if (gyroXSum < 0) gyroXSum = 0;
 
             if (gyroXSum > gyroXThreshold) {
                 Serial.println("MEIW!");
