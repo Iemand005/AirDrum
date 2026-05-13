@@ -17,7 +17,7 @@ navigator.serial.getPorts().then((ports) => {
   console.log("gor ports", ports)
 });
 
-async function startReadingLines() {
+async function startReadingLines(port) {
   let buffer = "";
 
   while (port.readable) {
@@ -47,7 +47,7 @@ async function startReadingLines() {
 }
 
 function uh() {
-  navigator.serial.requestPort({ filters: [{ usbVendorId }] }).then(port => port.open({ baudRate }).then(startReadingLines)).catch((e) => console.warn("User did not select a port or something", e));
+  navigator.serial.requestPort({ filters: [{ usbVendorId }] }).then(port => port.open({ baudRate }).then(startReadingLines)).catch(e => console.warn("User did not select a port or something", e));
 }
 
 function startListening() {
