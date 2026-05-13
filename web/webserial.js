@@ -76,7 +76,12 @@ function startListening() {
   uh(data => {
     console.log("Receied line:", data);
     // ok i wanna now check if it's a drum sound and play
-    playBeep();
+    var splits = data.split(" ");
+    const code = splits[2];
+    console.log("code!!!: ", code);
+    if (code === "67") playBeep(1000);
+    if (code === "69") playBeep(2000);
+    
   })
 }
 
