@@ -11,7 +11,7 @@ class AirDrumServer {
     WiFi.mode(WIFI_OFF);
   }
 
-  bool wifiConnect(const char *ssid, const char *password) {
+  bool connectWiFi(const char *ssid, const char *password) {
     WiFi.begin(ssid, password);
 
     while (WiFi.status() != WL_CONNECTED) {
@@ -23,6 +23,8 @@ class AirDrumServer {
     Serial.println("Wi-Fi Connected!");
     Serial.print("IP-adres of: ");
     Serial.println(WiFi.localIP());
+
+    return true;
   }
 
   void disableBluetooth() {
