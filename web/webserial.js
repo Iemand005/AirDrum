@@ -17,7 +17,7 @@ navigator.serial.getPorts().then((ports) => {
   console.log("gor ports", ports)
 });
 
-function playBeep(frequency = 440, duration = 200) {
+function playBeep(frequency = 1000, duration = 200, volume = 0.8) {
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
     
     const oscillator = audioCtx.createOscillator();
@@ -30,7 +30,7 @@ function playBeep(frequency = 440, duration = 200) {
     oscillator.type = 'sine';
     oscillator.frequency.value = frequency;
 
-    gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+    gainNode.gain.setValueAtTime(volume, audioCtx.currentTime);
     gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + duration / 1000);
 
     oscillator.start(audioCtx.currentTime);
