@@ -244,18 +244,11 @@ void loop() {
     auto jerk = currentAccel - lastAccel;
 
     lastAccel = currentAccel;
-
     
-    // Use sum of absolute differences as movement magnitude
-    // int magnitude = abs(dx) + abs(dy) + abs(dz);
     int magnitude = jerk.magnitude();
 
-    // magnitude /= 100;
     magnitude -= 100;
     magnitude /= 10;
-
-    // if (magnitude > 255) magnitude = 255;
-    // if (magnitude < 0) magnitude = 0;
     
     if (magnitude > threshold) {
         digitalWrite(pinLed, HIGH);
