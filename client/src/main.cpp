@@ -45,6 +45,9 @@ void loop() {
     if (mySwitch.available()) {
         unsigned long receivedCode = mySwitch.getReceivedValue();
 
+        Serial.print("Rough code: ");
+        Serial.println(receivedCode);
+
         unsigned long code = receivedCode / 1000;
         int value = receivedCode % 1000;
 
