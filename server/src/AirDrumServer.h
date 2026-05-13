@@ -5,9 +5,16 @@
 #include <Arduino.h>
 #include <WiFi.h>
 
-class AirDrumServer {
+#include "SocketServer.h"
+
+class AirDrumServer : public SocketServer {
 
 public:
+
+  AirDrumServer() : SocketServer() {
+    
+  }
+
   void disableWiFi() {
     WiFi.disconnect(true); 
     WiFi.mode(WIFI_OFF);
