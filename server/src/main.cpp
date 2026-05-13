@@ -41,7 +41,7 @@ VCC -> resistor 220 Ohm -> Arduino D3
 #define REG_WHO_AM_I 0x75
 
 // Threshold for movement detection (tune as needed)
-const int threshold = 2000;
+const int threshold = 2300;
 
 const bool applyLowPassFilter = true;
 
