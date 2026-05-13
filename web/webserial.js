@@ -38,6 +38,9 @@ button.addEventListener("click", () => {
             }
             // Do something with |value|...
             console.log("", value);
+
+            // const data = new TextDecoder().decode(value);
+            console.log(data);
           }
         } catch (error) {
           // Handle |error|...
