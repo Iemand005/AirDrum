@@ -79,8 +79,8 @@ function startListening() {
     var splits = data.split(" ");
     const code = splits[2];
     console.log("code!!!: ", code);
-    if (code === "67") playBeep(1000);
-    if (code === "69") playBeep(2000);
+    if (code === "67") playBeep(2000);
+    if (code === "69") playBeep(1000);
     
   })
 }

@@ -44,7 +44,7 @@ VCC -> resistor 220 Ohm -> Arduino D3
 const int threshold = 1;
 
 const int gyroXdiff = 20;
-const int gyroXThreshold = 20000;
+const int gyroXThreshold = 2000;
 const int gyroXIgnoreBelow = 20;
 const int gyroXCancel = -5;
 int gyroXSum = 0;
@@ -271,7 +271,7 @@ void loop() {
             Serial.print("Gyro X Sum: "); Serial.println(gyroXSum);
 
             // if (rotation.x > )
-            if (rotation.x < gyroXCancel) {
+            if (rotation.x < gyroXCancel && gyroXSum > 500) {
                 gyroXSum = 0;
                 mySwitch.send(67, 24);
             }
