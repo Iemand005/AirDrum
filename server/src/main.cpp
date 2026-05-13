@@ -251,7 +251,7 @@ void loop() {
     int magnitude = jerk.magnitude();
 
     // magnitude /= 100;
-    magnitude -= 500;
+    magnitude -= 100;
     magnitude /= 10;
 
     // if (magnitude > 255) magnitude = 255;
