@@ -57,7 +57,7 @@ bool hasHit = true;
 
 bool moving = false;
 const int stopMovingThreshold = 3;
-int moveTriggerCount = 0;
+int stillMomentCount = 0;
 
 const bool applyLowPassFilter = true;
 
@@ -264,8 +264,8 @@ void loop() {
     
     if (magnitude > threshold) {
         moving = true;
-        moveTriggerCount++;
-        digitalWrite(pinLed, HIGH);
+        // stillMomentCount++;
+        // digitalWrite(pinLed, HIGH);
         // analogWrite(pinLed, 10);
         Serial.print("Movement detected! Magnitude: ");
         Serial.println(magnitude);
@@ -308,15 +308,19 @@ void loop() {
                 gyroXSum = 0;
             }
         } else {
+            // stillMomentCount++;
             Serial.println("Didn't rotate enough. Ignoring...");
         }
 
         // code++;
         // mySwitch.send(code, 24);
     } else {
-        digitalWrite(pinLed, LOW);
+        // moveTriggerCount++
+        stillMomentCount++;
+        moving = false;
     }
-
+    
+    digitalWrite(pinLed, moving ? HIGH : LOW);
     // Broadcast
 
 
