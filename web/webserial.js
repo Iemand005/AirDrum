@@ -1,6 +1,8 @@
 
 const usbVendorId = 0x0403;
 
+const baudRate = 115200;
+
 const button = document.getElementById("button");
 
 navigator.serial.addEventListener("connect", (e) => {
@@ -25,7 +27,7 @@ button.addEventListener("click", () => {
     .requestPort({ filters: [{ usbVendorId }] })
     .then(async port => {
       // port
-      await port.open({ baudRate: 9600 });
+      await port.open({ baudRate });
 
       while (port.readable) {
         const reader = port.readable.getReader();
