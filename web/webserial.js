@@ -24,28 +24,35 @@ button.addEventListener("click", () => {
     .then(async port => {
       await port.open({ baudRate });
 
-      while (port.readable) {
-        const lineStream = port.readable.pipeThrough(new TextDecoderStream()).pipeThrough(new TransformStream(new TextLineStreamTransformer()));
+      let buffer = "";
 
-        const reader = lineStream.getReader();
+      while (port.readable) {
+        const textDecoderStream = new TextDecoderStream();
+        port.readable.pipeTo(textDecoderStream.writable);
+        const reader = textDecoderStream.readable.getReader();
 
         try {
           while (true) {
             const { value, done } = await reader.read();
-            if (done) {
-              break;
-            }
-            
-            const trimmedLine = value.trim();
-            if (trimmedLine.length > 0) {
-              parseData(trimmedLine);
+            if (done) break;
+
+            buffer += value;
+            const lines = buffer.split("\n");
+            buffer = lines.pop();
+
+            for (const line of lines) {
+              callback(line);
             }
           }
         } catch (error) {
-          console.error("Read error:", error);
+          console.error(error);
         } finally {
           reader.releaseLock();
         }
       }
+
     }).catch((e) => console.warn("User did not select a port or something", e));
-});
+  });
+function callback(data) {
+  console.log(data);
+}
