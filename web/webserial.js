@@ -75,6 +75,8 @@ function uh(callback) {
 function startListening() {
   uh(data => {
     console.log("Receied line:", data);
+    // ok i wanna now check if it's a drum sound and play
+    playBeep();
   })
 }
 
