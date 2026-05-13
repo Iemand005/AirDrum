@@ -42,6 +42,8 @@ void loop() {
 
     digitalWrite(pinLed, ledStatus);
 
+    int lastCode = 0;
+
     if (mySwitch.available()) {
         unsigned long receivedCode = mySwitch.getReceivedValue();
 
@@ -52,6 +54,12 @@ void loop() {
         // int value = receivedCode % 1000;
 
         int code = receivedCode >> 4;
+
+        if (lastCode == code) {
+            Serial.println("Already had this code.. skppinngggg. skip");
+            return;
+        }
+
         int value = receivedCode & 0x0F;
 
         if (receivedCode == 0) {
