@@ -29,6 +29,7 @@ VCC -> resistor 220 Ohm -> Arduino D3
 #define pinButton 5
 #define pinLed 2 // Set to 3 for arduino
 #define pinTransmitter 4
+#define transmitRepeat 3
 
 // MPU-9265 I2C address
 #define MPU_ADDR 0x68
@@ -220,6 +221,8 @@ void setup() {
 
     mySwitch.enableTransmit(pinTransmitter);
 
+    mySwitch.setRepeatTransmit(transmitRepeat);
+
     Serial.println("Setup complete");
 }
 
@@ -331,5 +334,5 @@ void loop() {
         digitalWrite(pinLed, LOW);
     }
 
-    delay(10);
+    delay(1);
 }
