@@ -109,7 +109,7 @@ void sendValue(int value) {
     Serial.print(code);
     Serial.print(", \"value\": ");
     Serial.print(value);
-    Serial.print(" }");
+    Serial.println(" }");
 
     mySwitch.send(combined, 24);
     code++;
