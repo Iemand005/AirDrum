@@ -6,7 +6,7 @@
 #include <WiFiCredentials.h>
 // #include "../lib/WhaddaServer.h"
 #include <WhaddaServer.h>
-
+#include <SerialCodes.h>
 
 // Accelerometer reader
 
@@ -104,12 +104,13 @@ int code = 0;
 void sendValue(int value) {
     unsigned long combined = (code << 8) | value;
 
-    // Print the code to serial as `Message/ { "code": code, "value": value }`
-    Serial.print("Message: { \"code\": ");
-    Serial.print(code);
-    Serial.print(", \"value\": ");
-    Serial.print(value);
-    Serial.println(" }");
+    // // Print the code to serial as `Message/ { "code": code, "value": value }`
+    // Serial.print("Message: { \"code\": ");
+    // Serial.print(code);
+    // Serial.print(", \"value\": ");
+    // Serial.print(value);
+    // Serial.println(" }");
+    sendCodeOverSerial(code, value);
 
     mySwitch.send(combined, 24);
     code++;
