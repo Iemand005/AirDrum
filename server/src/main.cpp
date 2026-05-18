@@ -104,6 +104,13 @@ int code = 0;
 void sendValue(int value) {
     unsigned long combined = (code << 8) | value;
 
+    // Print the code to serial as `Message/ { "code": code, "value": value }`
+    Serial.print("Message: { \"code\": ");
+    Serial.print(code);
+    Serial.print(", \"value\": ");
+    Serial.print(value);
+    Serial.print(" }");
+
     mySwitch.send(combined, 24);
     code++;
 }
@@ -311,18 +318,11 @@ void loop() {
             if (gyroXSum < 0) gyroXSum = 0;
 
             if (!hasHit && gyroXSum > gyroXThreshold) {
-                // if () 
                 hasHit = true;
                 Serial.println("MEIW!");
 
-                // int value = 69;
                 sendValue(69);
-                // int combined = (code * 1000) + 69;
-                // unsigned long combined = (code << 8) | value;
 
-
-                // mySwitch.send(combined, 24);
-                // code++;
                 gyroXSum = 0;
             }
         } else {
