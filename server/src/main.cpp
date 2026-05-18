@@ -9,7 +9,7 @@
 #include <SerialCodes.h>
 
 //#define USE_WIFI
-// 
+// #define USE_WHADDA
 
 // Accelerometer reader
 
@@ -248,14 +248,16 @@ void setup() {
     // Server init
 
     // Serial.begin(115200);
-    Serial.println("Starting Wadda server...");
+
+#ifdef USE_WHADDA
+    Serial.println("Starting Whadda server...");
 
     pinMode(pinLed, OUTPUT);
 
     mySwitch.enableTransmit(pinTransmitter);
 
     mySwitch.setRepeatTransmit(transmitRepeat);
-
+#endif
 
     // Wifi stuffs
 #ifdef USE_WIFI
