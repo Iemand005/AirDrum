@@ -8,6 +8,9 @@
 #include <WhaddaServer.h>
 #include <SerialCodes.h>
 
+//#define USE_WIFI
+// 
+
 // Accelerometer reader
 
 /*
@@ -63,7 +66,6 @@ int stillMomentCount = 0;
 
 const bool applyLowPassFilter = true;
 
-#define USE_WIFI
 
 /**
  * @brief Vector of 3 16bit integers
