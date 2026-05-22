@@ -6,7 +6,7 @@
 #include <WiFi.h>
 
 #include "SocketServer.h"
-#inlcude "VecMath.h"
+#include "VecMath.h"
 #include "WhaddaServer.h"
 
 class AirDrumServer : public WebSocketServer, public WhaddaServer {
