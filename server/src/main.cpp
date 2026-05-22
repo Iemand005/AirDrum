@@ -275,6 +275,12 @@ void loop() {
     int magnitude = jerk.magnitude();
 
     if (broadcastAccel) {
+        auto currentTime = millis();
+        if (currentTime - lastIpPrintTime >= ipPrintInterval) {
+            lastIpPrintTime = currentTime;
+            
+            server.printIp();
+        }
         // Serial.print("Acceleration - X: "); Serial.print(currentAccel.x);
         // Serial.print(" Y: "); Serial.print(currentAccel.y);
         // Serial.print(" Z: "); Serial.println(currentAccel.z);
