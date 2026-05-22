@@ -57,7 +57,7 @@ const int threshold = 1;
 const int gyroXdiff = 20;
 const Vec3I16 gyroThreshold = {1500, 1500, 1500};
 const int gyroXIgnoreBelow = 20;
-const int gyroXCancel = -5;
+const Vec3I16 gyroCancel = {-5, -5, -5};
 Vec3I16 gyroSum = {0, 0, 0};
 bool hasHit = true;
 
@@ -314,18 +314,25 @@ void loop() {
 
         if (rotation.x < 0) hasHit = false;
 
-        if (abs(rotation.x) > gyroXIgnoreBelow) {
+        if (abs(rotation.x) > gyroXIgnoreBelow ||² abs(rotation.z) > gyroXIgnoreBelow) {
 
             Serial.print("Gyro X Sum: "); Serial.println(gyroSum.x);
 
             // if (rotation.x > )
-            if (rotation.x < gyroXCancel && gyroSum.x > 500) {
+            if (rotation.x < gyroCancel.x && gyroSum.x > 500) {
                 gyroSum.x = 0;
                 
                 sendValue(67);
             }
 
+            if (rotation.z < gyroCancel.z && gyroSum.z > 500) {
+                gyroSum.z = 0;
+                
+                sendValue(67);
+            }
+
             gyroSum.x += rotation.x;
+            gyroSum.z += rotation.z;
             if (gyroSum.x < 0) gyroSum.x = 0;
 
             if (!hasHit && gyroSum.x > gyroThreshold.x) {
@@ -335,6 +342,15 @@ void loop() {
                 sendValue(69);
 
                 gyroSum.x = 0;
+            }
+
+
+            if (!hasHit && gyroSum.z > gyroThreshold.z) {
+                Serial.println("Switching drum!");
+
+                sendValue(69);
+
+                gyroSum.z = 0;
             }
         } else if (verboseLog) {
             Serial.println("Didn't rotate enough. Ignoring...");
