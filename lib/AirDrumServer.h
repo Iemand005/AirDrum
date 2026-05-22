@@ -41,6 +41,11 @@ public:
   void disableBluetooth() {
     
   }
+
+  void broadcastAcceleration(float accel) {
+    String msg = "ACCEL:" + String(accel, 2); 
+    sendText(msg);
+  }
 };
 
 #endif
