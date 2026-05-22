@@ -32,7 +32,7 @@ public:
 
     Serial.println("");
     Serial.println("Wi-Fi Connected!");
-    Serial.print("IP-adres of: ");
+    Serial.print("IP: ");
     Serial.println(WiFi.localIP());
 
     return true;
