@@ -345,14 +345,10 @@ void loop() {
                 gyroXSum = 0;
             }
         } else if (verboseLog) {
-            // stillMomentCount++;
             Serial.println("Didn't rotate enough. Ignoring...");
         }
 
-        // code++;
-        // mySwitch.send(code, 24);
     } else {
-        // moveTriggerCount++
         stillMomentCount++;
         moving = false;
     }
@@ -365,20 +361,9 @@ void loop() {
 
     if (digitalReadButton == HIGH && !isButtonPressed) {
         isButtonPressed = true;
-
         Serial.println("Button pressed");
-        digitalWrite(pinLed, HIGH);
-
-        code++;
-        mySwitch.send(code, 24);
-
-
-        
     } else if (digitalReadButton == LOW && isButtonPressed) {
         isButtonPressed = false;
-
-        Serial.println("Button released");
-        digitalWrite(pinLed, LOW);
     }
 
     delay(1);
