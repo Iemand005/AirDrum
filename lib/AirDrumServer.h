@@ -46,6 +46,13 @@ public:
     String msg = "ACCEL:" + String(accel, 2); 
     sendText(msg);
   }
+
+private:
+  void sendText(const String& message) {
+    if (ws.count() > 0) {
+      ws.textAll(message);
+    }
+  }
 };
 
 #endif
