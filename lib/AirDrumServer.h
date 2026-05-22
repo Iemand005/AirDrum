@@ -32,10 +32,14 @@ public:
 
     Serial.println("");
     Serial.println("Wi-Fi Connected!");
-    Serial.print("IP: ");
-    Serial.println(WiFi.localIP());
+    printIp();
 
     return true;
+  }
+
+  void printIp() {
+    Serial.print("IP: ");
+    Serial.println(WiFi.localIP());
   }
 
   void disableBluetooth() {

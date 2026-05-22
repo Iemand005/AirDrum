@@ -257,6 +257,9 @@ void setup() {
     Serial.println("Setup complete");
 }
 
+unsigned long lastIpPrintTime = 0;
+const unsigned long ipPrintInterval = 5000;
+
 const bool broadcastAccel = true;
 
 void loop() {
