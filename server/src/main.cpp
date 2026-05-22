@@ -282,9 +282,9 @@ void loop() {
 
         // Serial.print("Magnitude: "); Serial.println(magnitude);
         server.broadcastAcceleration(currentAccel);
-        server.broadcastJerk(currentAccel);
-        server.broadcastGyro(magnitude);
-        server.broadcastMagnitude(magnitude);
+        // server.broadcastJerk(currentAccel);
+        // server.broadcastGyro(magnitude);
+        // server.broadcastMagnitude(magnitude);
     }
 
     magnitude -= 100;

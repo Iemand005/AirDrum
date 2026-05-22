@@ -42,8 +42,8 @@ public:
     
   }
 
-  void broadcastAcceleration(float accel) {
-    String msg = "ACCEL:" + String(accel, 2); 
+  void broadcastAcceleration(Vec3I16 accel) {
+    String msg = "ACCEL:" + String(accel.x) + "," + String(accel.y) + "," + String(accel.z);
     sendText(msg);
   }
 
