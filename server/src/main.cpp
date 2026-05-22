@@ -55,10 +55,10 @@ VCC -> resistor 220 Ohm -> Arduino D3
 const int threshold = 1;
 
 const int gyroXdiff = 20;
-const int gyroXThreshold = 1500;
+const Vec3I16 gyroThreshold = {1500, 1500, 1500};
 const int gyroXIgnoreBelow = 20;
 const int gyroXCancel = -5;
-int gyroXSum = 0;
+Vec3I16 gyroSum = {0, 0, 0};
 bool hasHit = true;
 
 bool moving = false;
@@ -316,25 +316,25 @@ void loop() {
 
         if (abs(rotation.x) > gyroXIgnoreBelow) {
 
-            Serial.print("Gyro X Sum: "); Serial.println(gyroXSum);
+            Serial.print("Gyro X Sum: "); Serial.println(gyroSum.x);
 
             // if (rotation.x > )
-            if (rotation.x < gyroXCancel && gyroXSum > 500) {
-                gyroXSum = 0;
+            if (rotation.x < gyroXCancel && gyroSum.x > 500) {
+                gyroSum.x = 0;
                 
                 sendValue(67);
             }
 
-            gyroXSum += rotation.x;
-            if (gyroXSum < 0) gyroXSum = 0;
+            gyroSum.x += rotation.x;
+            if (gyroSum.x < 0) gyroSum.x = 0;
 
-            if (!hasHit && gyroXSum > gyroXThreshold) {
+            if (!hasHit && gyroSum.x > gyroThreshold.x) {
                 hasHit = true;
                 Serial.println("MEIW!");
 
                 sendValue(69);
 
-                gyroXSum = 0;
+                gyroSum.x = 0;
             }
         } else if (verboseLog) {
             Serial.println("Didn't rotate enough. Ignoring...");
