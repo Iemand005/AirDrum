@@ -269,6 +269,8 @@ void setup() {
     Serial.println("Setup complete");
 }
 
+const bool broadcastAccel = true;
+
 void loop() {
 
     // Reaad accel data
@@ -280,6 +282,22 @@ void loop() {
     lastAccel = currentAccel;
 
     int magnitude = jerk.magnitude();
+
+    if (broadcastAccel) {
+        // Serial.print("Acceleration - X: "); Serial.print(currentAccel.x);
+        // Serial.print(" Y: "); Serial.print(currentAccel.y);
+        // Serial.print(" Z: "); Serial.println(currentAccel.z);
+
+        // Serial.print("Jerk - X: "); Serial.print(jerk.x);
+        // Serial.print(" Y: "); Serial.print(jerk.y);
+        // Serial.print(" Z: "); Serial.println(jerk.z);
+
+        // Serial.print("Magnitude: "); Serial.println(magnitude);
+        server.broadcastAcceleration(currentAccel);
+        server.broadcastJerk(currentAccel);
+        server.broadcastGyro(magnitude);
+        server.broadcastMagnitude(magnitude);
+    }
 
     magnitude -= 100;
     magnitude /= 10;
