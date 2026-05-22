@@ -258,7 +258,7 @@ void setup() {
 }
 
 unsigned long lastIpPrintTime = 0;
-const unsigned long ipPrintInterval = 5000;
+const unsigned long ipPrintInterval = 1000;
 
 const bool broadcastAccel = true;
 
