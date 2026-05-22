@@ -262,6 +262,8 @@ const unsigned long ipPrintInterval = 1000;
 
 const bool broadcastAccel = true;
 
+const bool verboseLog = false;
+
 void loop() {
 
     // Reaad accel data
@@ -302,7 +304,7 @@ void loop() {
     if (magnitude > threshold) {
 
         if (!moving) {
-            Serial.println("I started moving!  I'll report it this time...... ypu");
+            // Serial.println("I started moving!  I'll report it this time...... ypu");
 
 
         }
