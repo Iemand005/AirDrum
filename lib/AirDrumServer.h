@@ -50,6 +50,16 @@ public:
     String msg = "ACCEL:" + String((int)accel.x) + "," + String((int)accel.y) + "," + String((int)accel.z);
     sendText(msg);
   }
+
+  void broadcastGyro(Vec3 gyro) {
+    String msg = "GYRO:" + String((int)gyro.x) + "," + String((int)gyro.y) + "," + String((int)gyro.z);
+    sendText(msg);
+  }
+
+  void broadcastDrumHit(int drumId) {
+    String msg = "DRUM_HIT:" + String(drumId);
+    sendText(msg);
+  }
 };
 
 #endif

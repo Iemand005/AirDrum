@@ -328,7 +328,7 @@ void loop() {
             if (rotation.z < gyroCancel.z && gyroSum.z > 500) {
                 gyroSum.z = 0;
                 
-                sendValue(67);
+                // sendValue(67);
             }
 
             gyroSum.x += rotation.x;
@@ -338,6 +338,8 @@ void loop() {
             if (!hasHit && gyroSum.x > gyroThreshold.x) {
                 hasHit = true;
                 Serial.println("MEIW!");
+
+                server.broadcastDrumHit(instrumentId);
 
                 sendValue(69);
 
