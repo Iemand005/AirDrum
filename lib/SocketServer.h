@@ -3,7 +3,7 @@
 
 #include <ESPAsyncWebServer.h>
 
-
+const int RED_LED_PIN = 4; 
 
 class WebSocketServer {
 
@@ -21,6 +21,14 @@ public:
         Serial.print("WebSocket message! ");
         Serial.println(message);
         // 8
+      }
+      if (type == WS_EVT_CONNECT) {
+        Serial.println("WebSocket client connected");
+        digitalWrite(RED_LED_PIN, HIGH); 
+      }
+      if (type == WS_EVT_DISCONNECT) {
+        Serial.println("WebSocket client disconnected");
+        digitalWrite(RED_LED_PIN, LOW); 
       }
     });
     server.addHandler(&ws);

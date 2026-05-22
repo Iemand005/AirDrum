@@ -202,6 +202,7 @@ Vec3 readGyro() {
 
 // Transmitter code
 
+const int RED_LED_PIN = 4; 
 
 void setup() {
 
@@ -212,6 +213,9 @@ void setup() {
 
     pinMode(pinLed, OUTPUT);
     pinMode(pinButton, INPUT_PULLUP);
+
+    pinMode(RED_LED_PIN, OUTPUT);
+    digitalWrite(RED_LED_PIN, LOW);
 
     Wire.begin();
 
@@ -303,18 +307,16 @@ void loop() {
     
     if (magnitude > threshold) {
 
-        if (!moving) {
-            // Serial.println("I started moving!  I'll report it this time...... ypu");
-
-
+        if (!moving && verboseLog) {
+            Serial.println("I started moving! Wake up the WiFi or something if I turned it off over laying down for a minute");
         }
 
         moving = true;
-        // stillMomentCount++;
-        // digitalWrite(pinLed, HIGH);
-        // analogWrite(pinLed, 10);
+        
+        if (verboseLog) {
         Serial.print("Movement detected! Magnitude: ");
         Serial.println(magnitude);
+        }
 
         auto rotation = readGyro();
 
@@ -328,12 +330,7 @@ void loop() {
             if (rotation.x < gyroXCancel && gyroXSum > 500) {
                 gyroXSum = 0;
                 
-                // int value = 67;
                 sendValue(67);
-                // unsigned long combined = (code << 8) | value;
-                // mySwitch.send(combined, 24);
-                // code++;
-
             }
 
             gyroXSum += rotation.x;
