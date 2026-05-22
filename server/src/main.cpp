@@ -314,7 +314,7 @@ void loop() {
 
         if (rotation.x < 0) hasHit = false;
 
-        if (abs(rotation.x) > gyroXIgnoreBelow ||² abs(rotation.z) > gyroXIgnoreBelow) {
+        if (abs(rotation.x) > gyroXIgnoreBelow || abs(rotation.z) > gyroXIgnoreBelow) {
 
             Serial.print("Gyro X Sum: "); Serial.println(gyroSum.x);
 
