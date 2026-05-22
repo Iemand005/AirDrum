@@ -202,7 +202,7 @@ Vec3 readGyro() {
 
 // Transmitter code
 
-const int RED_LED_PIN = 4; 
+// const int RED_LED_PIN = 4; 
 
 void setup() {
 
