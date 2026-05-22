@@ -345,8 +345,20 @@ void loop() {
             }
 
 
-            if (!hasHit && gyroSum.z > gyroThreshold.z) {
+            if (gyroSum.z > gyroThreshold.z) {
                 Serial.println("Switching drum!");
+
+                sendValue(69);
+
+                instrumentId = (instrumentId + 1) % 3;
+
+                gyroSum.z = 0;
+            }
+
+            if (gyroSum.z < -gyroThreshold.z) {
+                Serial.println("Switching drum!");
+
+                instrumentId = (instrumentId - 1 + 3) % 3;
 
                 sendValue(69);
 
