@@ -8,7 +8,7 @@
 #include <WhaddaServer.h>
 #include <SerialCodes.h>
 
-//#define USE_WIFI
+#define USE_WIFI
 // #define USE_WHADDA
 
 // Accelerometer reader
