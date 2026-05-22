@@ -7,6 +7,7 @@
 // #include "../lib/WhaddaServer.h"
 #include <WhaddaServer.h>
 #include <SerialCodes.h>
+#include <VecMath.h>
 
 #define USE_WIFI
 // #define USE_WHADDA
@@ -67,20 +68,7 @@ int stillMomentCount = 0;
 const bool applyLowPassFilter = true;
 
 
-/**
- * @brief Vector of 3 16bit integers
- */
-struct Vec3I16 {
-    int16_t x, y, z;
 
-    Vec3I16 operator-(const Vec3I16& other) const {
-        return {x - other.x, y - other.y, z - other.z};
-    }
-
-    int magnitude() {
-        return abs(x) + abs(y) + abs(z);
-    }
-};
 
 /**
  * @brief Vector of 3 floats
