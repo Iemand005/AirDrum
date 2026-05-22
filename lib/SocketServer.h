@@ -27,6 +27,12 @@ public:
     
     server.begin();
   }
+
+  void sendText(const String& message) {
+    if (ws.count() > 0) {
+      ws.textAll(message);
+    }
+  }
 };
 
 #endif
