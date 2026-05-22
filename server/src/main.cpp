@@ -268,6 +268,9 @@ const bool broadcastAccel = true;
 
 const bool verboseLog = false;
 
+
+int instrumentId = 0;
+
 void loop() {
 
     // Reaad accel data
