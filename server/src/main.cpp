@@ -287,19 +287,8 @@ void loop() {
             
             server.printIp();
         }
-        // Serial.print("Acceleration - X: "); Serial.print(currentAccel.x);
-        // Serial.print(" Y: "); Serial.print(currentAccel.y);
-        // Serial.print(" Z: "); Serial.println(currentAccel.z);
 
-        // Serial.print("Jerk - X: "); Serial.print(jerk.x);
-        // Serial.print(" Y: "); Serial.print(jerk.y);
-        // Serial.print(" Z: "); Serial.println(jerk.z);
-
-        // Serial.print("Magnitude: "); Serial.println(magnitude);
         server.broadcastAcceleration(currentAccel);
-        // server.broadcastJerk(currentAccel);
-        // server.broadcastGyro(magnitude);
-        // server.broadcastMagnitude(magnitude);
     }
 
     magnitude -= 100;
