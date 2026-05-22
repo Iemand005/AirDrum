@@ -344,7 +344,7 @@ void loop() {
 
                 gyroXSum = 0;
             }
-        } else {
+        } else if (verboseLog) {
             // stillMomentCount++;
             Serial.println("Didn't rotate enough. Ignoring...");
         }
