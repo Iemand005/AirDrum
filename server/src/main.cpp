@@ -277,6 +277,7 @@ void loop() {
     auto currentAccel = readLinearAccel();
     auto lowPassedAccel = lowPassFilter(currentAccel);
     
+    server.keepAlive();
 
     auto jerk = currentAccel - lastAccel;
     lastAccel = currentAccel;
