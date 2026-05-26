@@ -20,6 +20,13 @@ struct Vec3I16 {
     }
 };
 
+/**
+ * @brief Vector of 3 floats
+ */
+struct Vec3 {
+    float x, y, z;
+};
+
 // /**
 //  * @brief Vector of 3 16bit integers
 //  */
