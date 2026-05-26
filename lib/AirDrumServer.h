@@ -51,8 +51,8 @@ public:
     sendText(msg);
   }
 
-  void broadcastGyro(Vec3 gyro) {
-    String msg = "GYRO:" + String((int)gyro.x) + "," + String((int)gyro.y) + "," + String((int)gyro.z);
+  void broadcastGyro(Vec3 gyroe) {
+    String msg = "GYRO:" + String((int)gyroe.x) + "," + String((int)gyroe.y) + "," + String((int)(gyroe.z));
     sendText(msg);
   }
 
