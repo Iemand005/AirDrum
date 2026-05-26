@@ -70,14 +70,6 @@ const bool applyLowPassFilter = true;
 
 
 
-/**
- * @brief Vector of 3 floats
- */
-struct Vec3 {
-    float x, y, z;
-};
-
-
 // Three-axis baseline values for resting position
 Vec3I16 baseAcceleration;
 Vec3 gyroBase, gyroLast;
