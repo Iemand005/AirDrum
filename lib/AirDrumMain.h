@@ -36,7 +36,7 @@ VCC       3.3V
 GND       GND
 SDA       GPIO 21
 SCL       GPIO 22
-INT       GPIO 4 (optional, for interrupts)
+INT       GPIO 12 (optional, for interrupts)
 */
 
 /*
@@ -215,14 +215,6 @@ Vec3 readGyro() {
 }
 
 
-// Transmitter code
-
-// const int RED_LED_PIN = 4; 
-
-void enableWakeOnMotion(MPU9250_WE myMPU) {
-    myMPU.enableWakeOnMotion(MPU9250_WOM_ENABLE, MPU9250_WOM_COMP_ENABLE);
-    esp_sleep_enable_ext0_wakeup(GPIO_NUM_4, 1);
-}
 
 void enterDeepSleep() {
     esp_deep_sleep_start();
@@ -237,13 +229,9 @@ if(!myMPU.init()){
     Serial.println("MPU-9265 niet verbonden!");
   }
 
-// myMPU.enableWakeOnMotion(MPU9250_WOM_ENABLE, MPU9250_WOM_COMP_ENABLE);
-
-// esp_sleep_enable_ext0_wakeup(GPIO_NUM_4, 1);
-
-//   enable
+    myMPU.enableWakeOnMotion(MPU9250_WOM_ENABLE, MPU9250_WOM_COMP_ENABLE);
+    esp_sleep_enable_ext0_wakeup(GPIO_NUM_4, 1);
   
-  esp_deep_sleep_start();
 
     // Accelerometer init
 
@@ -432,6 +420,16 @@ void airLoop() {
     } else {
         stillMomentCount++;
         moving = false;
+        if (stillMomentCount > stopMovingThreshold) {
+            hasHit = false;
+            gyroSum.x = 0;
+            gyroSum.z = 0;
+        }
+
+        if (stillMomentCount > sleepThreshold) {
+            Serial.println("I've been still for a while, going to sleep...");
+            enterDeepSleep();
+        }
     }
     
     digitalWrite(pinLed, moving ? HIGH : LOW);
