@@ -5,9 +5,9 @@
 #include <stdint.h>
 
 struct AirDrumData {
-  uint8_t sensorId;
-  uint8_t velocity;
-  uint8_t drumType;
+  uint8_t code;
+  uint8_t key;
+  uint8_t value;
 };
 
 union DataPacket {
