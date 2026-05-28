@@ -14,6 +14,12 @@
 #include <SerialCodes.h>
 #include <VecMath.h>
 
+// #include <MPU9250.h>
+#include <MPU9250_WE.h>
+
+#define MPU9250_ADDR 0x68 // Standaard I2C adres van de MPU-9265
+MPU9250_WE myMPU = MPU9250_WE(MPU9250_ADDR);
+
 #define USE_WIFI
 // #define USE_WHADDA
 

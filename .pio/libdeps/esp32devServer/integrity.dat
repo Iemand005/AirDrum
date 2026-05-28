@@ -1,3 +1,4 @@
-Wire
+wollewald/MPU9250_WE @ ^1.2.17
 ESP32Async/ESPAsyncWebServer
 sui77/rc-switch@^2.6.4
+Wire
