@@ -73,6 +73,9 @@ VCC -> resistor 220 Ohm -> Arduino D3
 // Threshold for movement detection (tune as needed)
 const int threshold = 1;
 
+                const int maxInstruments = 8;
+
+
 const int gyroXdiff = 20;
 const Vec3I16 gyroThreshold = {1500, 1500, 2000};
 const int gyroXIgnoreBelow = 20;
@@ -401,8 +404,6 @@ void airLoop() {
 
                 // sendValue(69);
 
-                const
-                maxInstruments = 8;
 
                 // instrumentId = (instrumentId + 1) % 3;
                 instrumentId++;
