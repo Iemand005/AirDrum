@@ -5,7 +5,9 @@
 #include <AirDrumServer.h>
 #include <WiFiCredentials.h>
 // #include "../lib/WhaddaServer.h"
+#ifdef WHADDA_SERVER
 #include <WhaddaServer.h>
+#endif
 #include <SerialCodes.h>
 #include <VecMath.h>
 

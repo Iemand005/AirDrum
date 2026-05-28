@@ -1,5 +1,8 @@
 
+#define WHADDA_RECEIVER
+
 #include <AirDrumMain.h>
+
 
 void setup() {
     airSetup();
