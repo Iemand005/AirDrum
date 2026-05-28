@@ -18,7 +18,7 @@
 
 #define USE_WIFI
 // #define USE_WHADDA
-#define USE_WOM // Wake on mitionion
+// #define USE_WOM // Wake on motion
 
 // Accelerometer reader
 
@@ -330,7 +330,7 @@ void airLoop() {
 
 #ifdef WHADDA_RECEIVER
     auto data = server.receiveData();
-    if (data.value.code != 0) {
+    if (data.code != 0) {
         Serial.print("Received Whadda data - Code: ");
         Serial.print(data.code);
         Serial.print(" Key: ");
