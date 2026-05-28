@@ -340,11 +340,11 @@ void airLoop() {
         Serial.print(data.key);
         Serial.print(" Value: ");
         Serial.println(data.value);
+        if (data.key == 69)
         server.broadcastDrumHit(data.value);
     }
-    // server.
 
-    #endif
+#endif
 
     magnitude -= 100;
     magnitude /= 10;
