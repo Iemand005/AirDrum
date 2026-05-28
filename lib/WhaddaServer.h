@@ -15,11 +15,15 @@ public:
   WhaddaServer() : mySwitch() {}
 
   void sendValue(int value) {
+    sendKeyValue(0, value);
+  }
+  
+  void sendKeyValue(int key, int value) {
       // unsigned long combined = (code << 8) | value;
       WhaddaData data;
 
       data.code = code;
-      data.key = 0;
+      data.key = key;
       data.value = value;
 
       DataPacket packet;
