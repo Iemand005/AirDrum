@@ -302,7 +302,15 @@ void airLoop() {
 
 #ifdef WHADDA_RECEIVER
     auto data = server.receiveData();
+    if (data.value.code != 0) {
+        Serial.print("Received Whadda data - Code: ");
+        Serial.print(data.code);
+        Serial.print(" Key: ");
+        Serial.print(data.key);
+        Serial.print(" Value: ");
+        Serial.println(data.value);
     server.broadcastDrumHit(data.value);
+    }
     // server.
 
     #endif
