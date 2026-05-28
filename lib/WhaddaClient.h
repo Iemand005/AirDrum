@@ -15,18 +15,7 @@ public:
   WhaddaClient() : mySwitch() {}
 
   int receiveValue() {
-    if (mySwitch.available()) {
-        unsigned long receivedCode = mySwitch.getReceivedValue();
-
-        DataPacket data;
-        data.rawData = receivedCode;
-
-        mySwitch.resetAvailable();
-
-        return data.drum.value;
-    }
-
-    return -1;
+    return receiveData().value;
   }
 
   WhaddaData receiveData() {
