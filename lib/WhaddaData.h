@@ -1,17 +1,17 @@
 
-#ifndef AIR_DRUM_DATA_H
-#define AIR_DRUM_DATA_H
+#ifndef WhaddaData_h
+#define WhaddaData_h
 
 #include <stdint.h>
 
-struct AirDrumData {
+struct WhaddaData {
   uint8_t code;
   uint8_t key;
   uint8_t value;
 };
 
 union DataPacket {
-  AirDrumData drum;
+  WhaddaData drum;
   uint32_t rawData;
 };
 
