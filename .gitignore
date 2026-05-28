@@ -1,2 +1,5 @@
 *.log
 **/.pio
+
+# Don't publish wifi credentials
+WiFiCredentials.h
