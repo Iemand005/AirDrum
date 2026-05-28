@@ -309,7 +309,7 @@ void airLoop() {
         Serial.print(data.key);
         Serial.print(" Value: ");
         Serial.println(data.value);
-    server.broadcastDrumHit(data.value);
+        server.broadcastDrumHit(data.value);
     }
     // server.
 
