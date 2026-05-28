@@ -393,8 +393,6 @@ void airLoop() {
 
                 server.broadcastDrumHit(instrumentId);
 
-                // sendValue(69);
-
                 gyroSum.x = 0;
             }
 
@@ -402,12 +400,8 @@ void airLoop() {
             if (gyroSum.z > gyroThreshold.z) {
                 Serial.println("Switching drum!");
 
-                // sendValue(69);
-
-
-                // instrumentId = (instrumentId + 1) % 3;
-                instrumentId++;
-                instrumentId = min(instrumentId, maxInstruments);
+                instrumentId--;
+                instrumentId = max(instrumentId, 0);
 
                 gyroSum.z = 0;
             }
@@ -415,11 +409,8 @@ void airLoop() {
             if (gyroSum.z < -gyroThreshold.z) {
                 Serial.println("Switching drum!");
 
-                // instrumentId = (instrumentId - 1 + 3) % 3;
-                instrumentId--;
-                instrumentId = max(instrumentId, 0);
-
-                // sendValue(69);
+                instrumentId++;
+                instrumentId = min(instrumentId, maxInstruments);
 
                 gyroSum.z = 0;
             }
