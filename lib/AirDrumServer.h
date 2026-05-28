@@ -9,8 +9,9 @@
 #include "SocketServer.h"
 #include "VecMath.h"
 #include "WhaddaServer.h"
+#include "WhaddaClient.h"
 
-class AirDrumServer : public WebSocketServer, public WhaddaServer {
+class AirDrumServer : public WebSocketServer, public WhaddaServer, public WhaddaClient {
 
 public:
 
@@ -61,7 +62,10 @@ public:
     String msg = "DRUM_HIT:" + String(drumId);
     sendText(msg);
 
-    sendValue(69);
+    #ifdef WHADDA_TRANSMITTER
+    sendKeyValue(69, drumId);
+    // sendValue(69);
+    #endif
   }
 };
 

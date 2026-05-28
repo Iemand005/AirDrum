@@ -101,7 +101,7 @@ void sendKeyValue(int key, int value) {
     sendCodeOverSerial(code, value);
     
     unsigned long combined = (code << 8) | value;
-    
+
 
     mySwitch.send(combined, 24);
     code++;
@@ -295,6 +295,17 @@ void airLoop() {
 
         server.broadcastAcceleration(currentAccel);
     }
+
+
+//     server.receiveData();
+// #endif
+
+#ifdef WHADDA_RECEIVER
+    auto data = server.receiveData();
+    server.broadcastDrumHit(data.value);
+    // server.
+
+    #endif
 
     magnitude -= 100;
     magnitude /= 10;
