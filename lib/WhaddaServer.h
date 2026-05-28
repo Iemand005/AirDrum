@@ -15,9 +15,14 @@ public:
   WhaddaServer() : mySwitch() {}
 
   void sendValue(int value) {
-      unsigned long combined = (code << 8) | value;
+      // unsigned long combined = (code << 8) | value;
+      WhaddaData data;
 
-      this->mySwitch.send(combined, 24);
+      data.code = code;
+      data.key = 0;
+      data.value = value;
+
+      this->mySwitch.send(data.rawData, 24);
       code++;
   }
 };
