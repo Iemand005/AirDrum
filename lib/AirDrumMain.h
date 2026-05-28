@@ -18,7 +18,7 @@
 
 #define USE_WIFI
 // #define USE_WHADDA
-#define USE_WOM // Wake on mition
+#define USE_WOM // Wake on mitionion
 
 // Accelerometer reader
 
@@ -67,9 +67,6 @@ VCC -> resistor 220 Ohm -> Arduino D3
 #define REG_ACCEL_XOUT_H 0x3B
 #define GYRO_XOUT_H 0x43
 #define REG_WHO_AM_I 0x75
-
-MPU9250_WE myMPU = MPU9250_WE(MPU_ADDR);
-
 
 // Threshold for movement detection (tune as needed)
 const int threshold = 1;
@@ -220,7 +217,29 @@ Vec3 readGyro() {
 
 // const int RED_LED_PIN = 4; 
 
+void enableWakeOnMotion() {
+    myMPU.enableWakeOnMotion(MPU9250_WOM_ENABLE, MPU9250_WOM_COMP_ENABLE);
+    esp_sleep_enable_ext0_wakeup(GPIO_NUM_4, 1);
+}
+
+void enterDeepSleep() {
+    esp_deep_sleep_start();
+}
+
 void airSetup() {
+
+    
+MPU9250_WE myMPU = MPU9250_WE(MPU_ADDR);
+
+if(!myMPU.init()){
+    Serial.println("MPU-9265 niet verbonden!");
+  }
+
+myMPU.enableWakeOnMotion(MPU9250_WOM_ENABLE, MPU9250_WOM_COMP_ENABLE);
+
+esp_sleep_enable_ext0_wakeup(GPIO_NUM_4, 1);
+  
+  esp_deep_sleep_start();
 
     // Accelerometer init
 
