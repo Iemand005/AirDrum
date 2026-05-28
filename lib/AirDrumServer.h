@@ -64,7 +64,6 @@ public:
 
     #ifdef WHADDA_TRANSMITTER
     sendKeyValue(69, drumId);
-    // sendValue(69);
     #endif
   }
 };
