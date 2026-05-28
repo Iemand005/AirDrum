@@ -22,7 +22,10 @@ public:
       data.key = 0;
       data.value = value;
 
-      this->mySwitch.send(data.rawData, 24);
+      DataPacket packet;
+      packet.drum = data;
+
+      this->mySwitch.send(packet.rawData, 24);
       code++;
   }
 };
