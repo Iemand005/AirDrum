@@ -16,7 +16,6 @@ public:
 
   int receiveValue() {
     if (mySwitch.available()) {
-//         unsigned long receivedCode = mySwitch.getReceivedValue();
         unsigned long receivedCode = mySwitch.getReceivedValue();
 
         DataPacket data;
@@ -27,7 +26,24 @@ public:
         return data.drum.value;
     }
 
-    return -1; // No value received
+    return -1;
+  }
+
+  WhaddaData receiveData() {
+    WhaddaData result = { 0, 0, 0 };
+
+    if (mySwitch.available()) {
+        unsigned long receivedCode = mySwitch.getReceivedValue();
+
+        DataPacket data;
+        data.rawData = receivedCode;
+
+        mySwitch.resetAvailable();
+
+        result = data.drum;
+    }
+
+    return result;
   }
 };
 
