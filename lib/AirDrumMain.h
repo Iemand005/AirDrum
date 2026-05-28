@@ -74,7 +74,7 @@ VCC -> resistor 220 Ohm -> Arduino D3
 const int threshold = 1;
 
 const int gyroXdiff = 20;
-const Vec3I16 gyroThreshold = {1500, 1500, 1500};
+const Vec3I16 gyroThreshold = {1500, 1500, 2000};
 const int gyroXIgnoreBelow = 20;
 const Vec3I16 gyroCancel = {-5, -5, -5};
 Vec3I16 gyroSum = {0, 0, 0};
@@ -399,9 +399,14 @@ void airLoop() {
             if (gyroSum.z > gyroThreshold.z) {
                 Serial.println("Switching drum!");
 
-                sendValue(69);
+                // sendValue(69);
 
-                instrumentId = (instrumentId + 1) % 3;
+                const
+                maxInstruments = 8;
+
+                // instrumentId = (instrumentId + 1) % 3;
+                instrumentId++;
+                if (instrumentId > maxInstruments) instrumentId = maxInstruments;
 
                 gyroSum.z = 0;
             }
@@ -409,7 +414,9 @@ void airLoop() {
             if (gyroSum.z < -gyroThreshold.z) {
                 Serial.println("Switching drum!");
 
-                instrumentId = (instrumentId - 1 + 3) % 3;
+                // instrumentId = (instrumentId - 1 + 3) % 3;
+                instrumentId--;
+                if (instrumentId < 0) instrumentId = 0;
 
                 // sendValue(69);
 
