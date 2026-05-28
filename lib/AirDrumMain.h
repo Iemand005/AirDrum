@@ -28,6 +28,15 @@ SCL       A5
 */
 
 /*
+MPU-9265  ESP32 
+VCC       3.3V
+GND       GND
+SDA       GPIO 21
+SCL       GPIO 22
+INT       GPIO 4 (optional, for interrupts)
+*/
+
+/*
 WPI469T   Arduino Nano
 VCC       3.3V
 GND       GND
