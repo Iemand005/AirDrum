@@ -14,14 +14,11 @@
 #include <SerialCodes.h>
 #include <VecMath.h>
 
-// #include <MPU9250.h>
 #include <MPU9250_WE.h>
-
-#define MPU9250_ADDR 0x68 // Standaard I2C adres van de MPU-9265
-MPU9250_WE myMPU = MPU9250_WE(MPU9250_ADDR);
 
 #define USE_WIFI
 // #define USE_WHADDA
+#define USE_WOM // Wake on mition
 
 // Accelerometer reader
 
@@ -70,6 +67,9 @@ VCC -> resistor 220 Ohm -> Arduino D3
 #define REG_ACCEL_XOUT_H 0x3B
 #define GYRO_XOUT_H 0x43
 #define REG_WHO_AM_I 0x75
+
+MPU9250_WE myMPU = MPU9250_WE(MPU_ADDR);
+
 
 // Threshold for movement detection (tune as needed)
 const int threshold = 1;
