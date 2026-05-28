@@ -411,7 +411,7 @@ void airLoop() {
 
                 instrumentId = (instrumentId - 1 + 3) % 3;
 
-                sendValue(69);
+                // sendValue(69);
 
                 gyroSum.z = 0;
             }
