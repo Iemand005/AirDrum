@@ -59,6 +59,8 @@ public:
   void broadcastDrumHit(int drumId) {
     String msg = "DRUM_HIT:" + String(drumId);
     sendText(msg);
+
+    sendValue(69);
   }
 };
 

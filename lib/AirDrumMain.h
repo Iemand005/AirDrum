@@ -5,8 +5,11 @@
 #include <AirDrumServer.h>
 #include <WiFiCredentials.h>
 // #include "../lib/WhaddaServer.h"
-#ifdef WHADDA_SERVER
+#ifdef WHADDA_TRANSMITTER
 #include <WhaddaServer.h>
+#endif
+#ifdef WHADDA_RECEIVER
+#include <WhaddaClient.h>
 #endif
 #include <SerialCodes.h>
 #include <VecMath.h>
@@ -336,7 +339,7 @@ void airLoop() {
 
                 server.broadcastDrumHit(instrumentId);
 
-                sendValue(69);
+                // sendValue(69);
 
                 gyroSum.x = 0;
             }
