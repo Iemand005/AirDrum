@@ -58,6 +58,8 @@ VCC -> resistor 220 Ohm -> Arduino D3
 
 #define transmitRepeat 3
 
+#define sleepThreshold 1000
+
 // MPU-9265 I2C address
 #define MPU_ADDR 0x68
 
@@ -217,7 +219,7 @@ Vec3 readGyro() {
 
 // const int RED_LED_PIN = 4; 
 
-void enableWakeOnMotion() {
+void enableWakeOnMotion(MPU9250_WE myMPU) {
     myMPU.enableWakeOnMotion(MPU9250_WOM_ENABLE, MPU9250_WOM_COMP_ENABLE);
     esp_sleep_enable_ext0_wakeup(GPIO_NUM_4, 1);
 }
@@ -235,9 +237,11 @@ if(!myMPU.init()){
     Serial.println("MPU-9265 niet verbonden!");
   }
 
-myMPU.enableWakeOnMotion(MPU9250_WOM_ENABLE, MPU9250_WOM_COMP_ENABLE);
+// myMPU.enableWakeOnMotion(MPU9250_WOM_ENABLE, MPU9250_WOM_COMP_ENABLE);
 
-esp_sleep_enable_ext0_wakeup(GPIO_NUM_4, 1);
+// esp_sleep_enable_ext0_wakeup(GPIO_NUM_4, 1);
+
+//   enable
   
   esp_deep_sleep_start();
 
