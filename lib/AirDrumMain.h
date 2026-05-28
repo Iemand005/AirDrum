@@ -407,7 +407,7 @@ void airLoop() {
 
                 // instrumentId = (instrumentId + 1) % 3;
                 instrumentId++;
-                if (instrumentId > maxInstruments) instrumentId = maxInstruments;
+                instrumentId = min(instrumentId, maxInstruments);
 
                 gyroSum.z = 0;
             }
@@ -417,7 +417,7 @@ void airLoop() {
 
                 // instrumentId = (instrumentId - 1 + 3) % 3;
                 instrumentId--;
-                if (instrumentId < 0) instrumentId = 0;
+                instrumentId = max(instrumentId, 0);
 
                 // sendValue(69);
 
