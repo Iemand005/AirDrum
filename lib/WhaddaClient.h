@@ -4,19 +4,30 @@
 
 #include <RCSwitch.h>
 
-class WhaddaServer {
+#include <WhaddaData.h>
+
+class WhaddaClient {
   int code = 0;
   RCSwitch mySwitch;
 
 public:
 
-  WhaddaServer() : mySwitch() {}
+  WhaddaClient() : mySwitch() {}
 
-  void sendValue(int value) {
-      unsigned long combined = (code << 8) | value;
+  int receiveValue() {
+    if (mySwitch.available()) {
+//         unsigned long receivedCode = mySwitch.getReceivedValue();
+        unsigned long receivedCode = mySwitch.getReceivedValue();
 
-      this->mySwitch.send(combined, 24);
-      code++;
+        DataPacket data;
+        data.rawData = receivedCode;
+
+        mySwitch.resetAvailable();
+
+        return data.drum.value;
+    }
+
+    return -1; // No value received
   }
 };
 

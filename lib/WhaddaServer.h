@@ -4,7 +4,7 @@
 
 #include <RCSwitch.h>
 
-#include <AirDrumData.h>
+#include <WhaddaData.h>
 
 class WhaddaServer {
   int code = 0;
