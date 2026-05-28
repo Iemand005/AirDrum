@@ -89,15 +89,19 @@ RCSwitch mySwitch = RCSwitch();
 int code = 0;
 
 void sendValue(int value) {
+    sendCodeOverSerial(code, value);
+    
     unsigned long combined = (code << 8) | value;
 
-    // // Print the code to serial as `Message/ { "code": code, "value": value }`
-    // Serial.print("Message: { \"code\": ");
-    // Serial.print(code);
-    // Serial.print(", \"value\": ");
-    // Serial.print(value);
-    // Serial.println(" }");
+    mySwitch.send(combined, 24);
+    code++;
+}
+
+void sendKeyValue(int key, int value) {
     sendCodeOverSerial(code, value);
+    
+    unsigned long combined = (code << 8) | value;
+    
 
     mySwitch.send(combined, 24);
     code++;

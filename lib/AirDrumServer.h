@@ -4,6 +4,7 @@
 
 #include <Arduino.h>
 #include <WiFi.h>
+#include <SerialCodes.h>
 
 #include "SocketServer.h"
 #include "VecMath.h"
