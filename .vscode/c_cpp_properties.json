@@ -8,7 +8,7 @@
         {
             "name": "PlatformIO",
             "includePath": [
-                "c:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT/src",
+                "c:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT",
                 "c:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT/.pio/libdeps/esp32devServer/ESPAsyncWebServer/src",
                 "C:/Users/Lasse/.platformio/packages/framework-arduinoespressif32/libraries/FS/src",
                 "c:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT/.pio/libdeps/esp32devServer/AsyncTCP/src",
@@ -247,7 +247,7 @@
             "browse": {
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
-                    "c:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT/src",
+                    "c:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT",
                     "c:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT/.pio/libdeps/esp32devServer/ESPAsyncWebServer/src",
                     "C:/Users/Lasse/.platformio/packages/framework-arduinoespressif32/libraries/FS/src",
                     "c:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT/.pio/libdeps/esp32devServer/AsyncTCP/src",
