@@ -229,8 +229,10 @@ if(!myMPU.init()){
     Serial.println("MPU-9265 niet verbonden!");
   }
 
+  #ifdef USE_WOM
     myMPU.enableWakeOnMotion(MPU9250_WOM_ENABLE, MPU9250_WOM_COMP_ENABLE);
-    esp_sleep_enable_ext0_wakeup(GPIO_NUM_4, 1);
+    esp_sleep_enable_ext0_wakeup(GPIO_NUM_12, 1);
+    #endif
   
 
     // Accelerometer init
@@ -426,10 +428,12 @@ void airLoop() {
             gyroSum.z = 0;
         }
 
+        #ifdef USE_WOM
         if (stillMomentCount > sleepThreshold) {
             Serial.println("I've been still for a while, going to sleep...");
             enterDeepSleep();
         }
+        #endif
     }
     
     digitalWrite(pinLed, moving ? HIGH : LOW);
