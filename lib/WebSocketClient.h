@@ -57,6 +57,7 @@ public:
 
     void begin() {
         _webSocket.onEvent(_webSocketEvent);
+        _webSocket.setExtraHeaders();
         _webSocket.begin(_host, _port, _path);
         _webSocket.setReconnectInterval(5000); 
     }
