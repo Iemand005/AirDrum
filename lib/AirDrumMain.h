@@ -310,11 +310,13 @@ if(!myMPU.init()){
     // Wifi stuffs
 #ifdef USE_WIFI
     boob.connectWiFi(SECRET_SSID, SECRET_PASS);
-#ifdef BE_SERVER
-
+    
+    #ifdef BE_SERVER
+    
     server.startListener();
-#else
-
+    #else
+    client.begin();
+    
     bool success = Ping.ping(SERVER_ADDRESS, 4);
 
     if (success) {
@@ -327,7 +329,6 @@ if(!myMPU.init()){
         Serial.println("[PING] Controleer of Windows Firewall AAN staat (deze blokkeert pings standaard).");
     }
 
-  client.begin();
 #endif
 #endif
 
