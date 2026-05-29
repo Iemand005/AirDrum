@@ -34,10 +34,10 @@ AirDrumClient client;
 
 
 #ifdef BE_SERVER
-auto boob = server;
+auto& boob = server;
 
 #else
-auto boob = client;
+auto& boob = client;
 #endif
 
 // Accelerometer reader
