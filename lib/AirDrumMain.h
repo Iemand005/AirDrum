@@ -93,6 +93,8 @@ int stillMomentCount = 0;
 const bool applyLowPassFilter = true;
 
 
+#define BE_SERVER
+
 
 
 // Three-axis baseline values for resting position
@@ -130,7 +132,11 @@ void sendKeyValue(int key, int value) {
 bool isButtonPressed = false;
 
 
+#ifdef BE_SERVER
 AirDrumServer server;
+#else
+AirDrumClient client;
+#endif
 
 
 // Low pass filter for accelerometer data to take out the garvity acceleration
@@ -288,9 +294,13 @@ if(!myMPU.init()){
 
     // Wifi stuffs
 #ifdef USE_WIFI
+#ifdef BE_SERVER
     server.connectWiFi(SECRET_SSID, SECRET_PASS);
 
     server.startListener();
+#else
+
+#endif
 #endif
 
     Serial.println("Setup complete");
