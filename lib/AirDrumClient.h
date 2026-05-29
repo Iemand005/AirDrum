@@ -11,11 +11,13 @@
 #include "WhaddaServer.h"
 #include "WhaddaClient.h"
 
+const String SERVER_ADDRESS = "10.25.238.47";
+
 class AirDrumClient : public WebSocketClient, public WhaddaServer, public WhaddaClient {
 
 public:
 
-  AirDrumClient() : WebSocketClient("10.25.238.47", 8080, "/ws/websocket") {
+  AirDrumClient() : WebSocketClient(SERVER_ADDRESS, 8080, "/ws/websocket") {
 
   }
 

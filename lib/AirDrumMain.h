@@ -314,6 +314,19 @@ if(!myMPU.init()){
 
     server.startListener();
 #else
+
+    bool success = Ping.ping(SERVER_ADDRESS, 4);
+
+    if (success) {
+        Serial.println("[PING SUCCESS] De ESP32 kan jouw computer fysiek bereiken!");
+        Serial.print("[PING] Gemiddelde responstijd: ");
+        Serial.print(Ping.averageTime());
+        Serial.println(" ms");
+    } else {
+        Serial.println("[PING FAILED] Geen gehoor. De computer antwoordt niet.");
+        Serial.println("[PING] Controleer of Windows Firewall AAN staat (deze blokkeert pings standaard).");
+    }
+
   client.begin();
 #endif
 #endif
