@@ -11,11 +11,11 @@
 #include "WhaddaServer.h"
 #include "WhaddaClient.h"
 
-class AirDrumServer : public WebSocketClient, public WhaddaServer, public WhaddaClient {
+class AirDrumClient : public WebSocketClient, public WhaddaServer, public WhaddaClient {
 
 public:
 
-  AirDrumServer() : WebSocketClient("10.25.238.47", 8080, "/ws/websocket") {
+  AirDrumClient() : WebSocketClient("10.25.238.47", 8080, "/ws/websocket") {
 
   }
 

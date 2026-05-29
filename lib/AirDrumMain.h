@@ -2,7 +2,6 @@
 #include <RCSwitch.h>
 #include <Wire.h>
 // #include <Math.h>
-#include <AirDrumClient.h>
 #include <WiFiCredentials.h>
 // #include "../lib/WhaddaServer.h"
 #ifdef WHADDA_TRANSMITTER
@@ -17,8 +16,18 @@
 #include <MPU9250_WE.h>
 
 #define USE_WIFI
+// #define BE_SERVER
 // #define USE_WHADDA
 // #define USE_WOM // Wake on motion
+
+
+#ifdef BE_SERVER
+#include <AirDrumServer.h>
+AirDrumServer server;
+#else
+#include <AirDrumClient.h>
+AirDrumClient client;
+#endif
 
 // Accelerometer reader
 
@@ -93,7 +102,6 @@ int stillMomentCount = 0;
 const bool applyLowPassFilter = true;
 
 
-// #define BE_SERVER
 
 
 
@@ -132,11 +140,7 @@ void sendKeyValue(int key, int value) {
 bool isButtonPressed = false;
 
 
-#ifdef BE_SERVER
-AirDrumServer server;
-#else
-AirDrumClient client;
-#endif
+
 
 
 // Low pass filter for accelerometer data to take out the garvity acceleration
@@ -299,7 +303,7 @@ if(!myMPU.init()){
 
     server.startListener();
 #else
-
+  client.begin();
 #endif
 #endif
 
@@ -322,7 +326,11 @@ void airLoop() {
     auto currentAccel = readLinearAccel();
     auto lowPassedAccel = lowPassFilter(currentAccel);
     
+    #ifdef BE_SERVER
     server.keepAlive();
+#else
+  client.loop();
+#endif
 
     auto jerk = currentAccel - lastAccel;
     lastAccel = currentAccel;

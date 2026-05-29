@@ -79,7 +79,6 @@ public:
         _webSocket.sendTXT(stompFrame);
     }
 
-    // Status check
     bool isConnected() {
         return _stompConnected;
     }
