@@ -19,6 +19,7 @@ private:
     }
 
     void handleEvent(WStype_t type, uint8_t * payload, size_t length) {
+      Serial.println("GOTTA :ESSAGE BURU");
         switch(type) {
             case WStype_DISCONNECTED:
                 Serial.println("[WS] Verbinding verbroken! Automatische herstelpoging loopt...");
@@ -27,7 +28,11 @@ private:
                 
             case WStype_CONNECTED:
                 Serial.println("[WS] Ruwe WebSocket verbonden. STOMP handshake starten...");
-                _webSocket.sendTXT("CONNECT\naccept-version:1.1,1.2\nheart-beat:10000,10000\n\n\0");
+                {
+                    String connectFrame = "CONNECT\naccept-version:1.1,1.2\nheart-beat:10000,10000\n\n";
+                    connectFrame += (char)0;
+                    _webSocket.sendTXT(connectFrame);
+                }
                 break;
                 
             case WStype_TEXT: {
@@ -74,7 +79,7 @@ public:
         stompFrame += "destination:/app/drum.send\n"; 
         stompFrame += "content-length:" + String(payload.length()) + "\n\n";
         stompFrame += payload;
-        stompFrame += "\0";
+        stompFrame += (char)0;
 
         _webSocket.sendTXT(stompFrame);
     }
