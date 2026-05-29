@@ -6,16 +6,38 @@
 
 class WebSocketClient {
 private:
+    static constexpr size_t MAX_PENDING_MESSAGES = 8;
     WebSocketsClient _webSocket;
     const char* _host;
     int _port;
     const char* _path;
     bool _wsConnected;
-    bool _warnedNotConnected;
+    size_t _pendingHead;
+    size_t _pendingTail;
+    String _pendingMessages[MAX_PENDING_MESSAGES];
 
     static void _webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
         if (WebSocketClient::instance != nullptr) {
             WebSocketClient::instance->handleEvent(type, payload, length);
+        }
+    }
+
+    void enqueueMessage(const String& payload) {
+        size_t nextTail = (_pendingTail + 1) % MAX_PENDING_MESSAGES;
+        if (nextTail == _pendingHead) {
+            // Drop the oldest message if the buffer is full.
+            _pendingHead = (_pendingHead + 1) % MAX_PENDING_MESSAGES;
+        }
+
+        _pendingMessages[_pendingTail] = payload;
+        _pendingTail = nextTail;
+    }
+
+    void flushPendingMessages() {
+        while (_pendingHead != _pendingTail && _wsConnected) {
+            _webSocket.sendTXT(_pendingMessages[_pendingHead]);
+            _pendingMessages[_pendingHead] = "";
+            _pendingHead = (_pendingHead + 1) % MAX_PENDING_MESSAGES;
         }
     }
 
@@ -24,12 +46,12 @@ private:
             case WStype_DISCONNECTED:
                 Serial.println("[WS] Verbinding verbroken! Automatische herstelpoging loopt...");
                 _wsConnected = false;
-                _warnedNotConnected = false;
                 break;
                 
             case WStype_CONNECTED:
                 Serial.println("[WS] WebSocket verbonden.");
                 _wsConnected = true;
+                flushPendingMessages();
                 break;
                 
             case WStype_TEXT: {
@@ -51,7 +73,8 @@ public:
         _port = port;
         _path = path;
         _wsConnected = false;
-        _warnedNotConnected = false;
+        _pendingHead = 0;
+        _pendingTail = 0;
         WebSocketClient::instance = this;
     }
 
@@ -68,10 +91,7 @@ public:
 
     void sendText(String payload) {
         if (!_wsConnected) {
-            if (!_warnedNotConnected) {
-                Serial.println("[WS] Kan bericht niet verzenden: WebSocket is niet verbonden!");
-                _warnedNotConnected = true;
-            }
+            enqueueMessage(payload);
             return;
         }
 
