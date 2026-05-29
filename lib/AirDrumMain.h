@@ -15,6 +15,9 @@
 
 #include <MPU9250_WE.h>
 
+#include <ESP32Ping.h>
+
+
 #define USE_WIFI
 // #define BE_SERVER
 // #define USE_WHADDA

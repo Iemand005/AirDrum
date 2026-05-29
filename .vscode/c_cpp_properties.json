@@ -9,6 +9,7 @@
             "name": "PlatformIO",
             "includePath": [
                 "C:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT",
+                "C:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT/.pio/libdeps/esp32devServer/ESP32Ping",
                 "C:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT/.pio/libdeps/esp32devServer/MPU9250_WE/src",
                 "C:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT/.pio/libdeps/esp32devServer/WebSockets/src",
                 "C:/Users/Lasse/.platformio/packages/framework-arduinoespressif32/libraries/WiFiClientSecure/src",
@@ -16,6 +17,7 @@
                 "C:/Users/Lasse/.platformio/packages/framework-arduinoespressif32/libraries/Ethernet/src",
                 "C:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT/.pio/libdeps/esp32devServer/ESPAsyncWebServer/src",
                 "C:/Users/Lasse/.platformio/packages/framework-arduinoespressif32/libraries/FS/src",
+                "C:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT/.pio/libdeps/esp32devServer/ArduinoJson/src",
                 "C:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT/.pio/libdeps/esp32devServer/AsyncTCP/src",
                 "C:/Users/Lasse/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
                 "C:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT/.pio/libdeps/esp32devServer/rc-switch",
@@ -250,6 +252,7 @@
                 "limitSymbolsToIncludedHeaders": true,
                 "path": [
                     "C:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT",
+                    "C:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT/.pio/libdeps/esp32devServer/ESP32Ping",
                     "C:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT/.pio/libdeps/esp32devServer/MPU9250_WE/src",
                     "C:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT/.pio/libdeps/esp32devServer/WebSockets/src",
                     "C:/Users/Lasse/.platformio/packages/framework-arduinoespressif32/libraries/WiFiClientSecure/src",
@@ -257,6 +260,7 @@
                     "C:/Users/Lasse/.platformio/packages/framework-arduinoespressif32/libraries/Ethernet/src",
                     "C:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT/.pio/libdeps/esp32devServer/ESPAsyncWebServer/src",
                     "C:/Users/Lasse/.platformio/packages/framework-arduinoespressif32/libraries/FS/src",
+                    "C:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT/.pio/libdeps/esp32devServer/ArduinoJson/src",
                     "C:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT/.pio/libdeps/esp32devServer/AsyncTCP/src",
                     "C:/Users/Lasse/.platformio/packages/framework-arduinoespressif32/libraries/WiFi/src",
                     "C:/Users/Lasse/Documents/Projects/airDrum-13-nl/IoT/.pio/libdeps/esp32devServer/rc-switch",
