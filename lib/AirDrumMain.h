@@ -309,8 +309,8 @@ if(!myMPU.init()){
 
     // Wifi stuffs
 #ifdef USE_WIFI
+    boob.connectWiFi(SECRET_SSID, SECRET_PASS);
 #ifdef BE_SERVER
-    server.connectWiFi(SECRET_SSID, SECRET_PASS);
 
     server.startListener();
 #else
