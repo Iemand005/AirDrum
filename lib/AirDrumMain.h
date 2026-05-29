@@ -29,6 +29,14 @@ AirDrumServer server;
 AirDrumClient client;
 #endif
 
+
+#ifdef BE_SERVER
+auto boob = server;
+
+#else
+auto boob = client;
+#endif
+
 // Accelerometer reader
 
 /*
@@ -342,10 +350,12 @@ void airLoop() {
         if (currentTime - lastIpPrintTime >= ipPrintInterval) {
             lastIpPrintTime = currentTime;
             
+            #ifdef BE_SERVER
             server.printIp();
+            #endif
         }
 
-        server.broadcastAcceleration(currentAccel);
+        boob.broadcastAcceleration(currentAccel);
     }
 
 
@@ -412,7 +422,7 @@ void airLoop() {
                 hasHit = true;
                 Serial.println("MEIW!");
 
-                server.broadcastDrumHit(instrumentId);
+                boob.broadcastDrumHit(instrumentId);
 
                 gyroSum.x = 0;
             }
