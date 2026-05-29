@@ -11,7 +11,7 @@
 #include "WhaddaServer.h"
 #include "WhaddaClient.h"
 
-const String SERVER_ADDRESS = "10.25.238.47";
+const char* SERVER_ADDRESS = "10.25.238.47";
 
 class AirDrumClient : public WebSocketClient, public WhaddaServer, public WhaddaClient {
 
