@@ -26,18 +26,10 @@
 
 #ifdef BE_SERVER
 #include <AirDrumServer.h>
-AirDrumServer server;
+AirDrumServer drummer;
 #else
 #include <AirDrumClient.h>
-AirDrumClient client;
-#endif
-
-
-#ifdef BE_SERVER
-auto& boob = server;
-
-#else
-auto& boob = client;
+AirDrumClient drummer;
 #endif
 
 // Accelerometer reader
@@ -309,7 +301,7 @@ if(!myMPU.init()){
 
     // Wifi stuffs
 #ifdef USE_WIFI
-    boob.connectWiFi(SECRET_SSID, SECRET_PASS);
+    drummer.connectWiFi(SECRET_SSID, SECRET_PASS);
     
     #ifdef BE_SERVER
     
@@ -372,7 +364,7 @@ void airLoop() {
             #endif
         }
 
-        boob.broadcastAcceleration(currentAccel);
+        drummer.broadcastAcceleration(currentAccel);
     }
 
 
@@ -440,7 +432,7 @@ void airLoop() {
                 hasHit = true;
                 Serial.println("MEIW!");
 
-                boob.broadcastDrumHit(instrumentId);
+                drummer.broadcastDrumHit(instrumentId);
 
                 gyroSum.x = 0;
             }
