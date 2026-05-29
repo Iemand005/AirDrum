@@ -363,6 +363,7 @@ void airLoop() {
 // #endif
 
 #ifdef WHADDA_RECEIVER
+#ifdef BE_SERVER
     auto data = server.receiveData();
     if (data.code != 0) {
         Serial.print("Received Whadda data - Code: ");
@@ -374,7 +375,7 @@ void airLoop() {
         if (data.key == 69)
         server.broadcastDrumHit(data.value);
     }
-
+#endif
 #endif
 
     magnitude -= 100;
