@@ -2,7 +2,7 @@
 #include <RCSwitch.h>
 #include <Wire.h>
 // #include <Math.h>
-#include <AirDrumServer.h>
+#include <AirDrumClient.h>
 #include <WiFiCredentials.h>
 // #include "../lib/WhaddaServer.h"
 #ifdef WHADDA_TRANSMITTER
