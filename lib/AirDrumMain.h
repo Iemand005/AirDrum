@@ -56,6 +56,9 @@ VCC -> resistor 220 Ohm -> Arduino D3
 #define pinTransmitter 4
 
 
+const int RED_LED_PIN = 4; 
+
+
 #define transmitRepeat 3
 
 #define sleepThreshold 1000

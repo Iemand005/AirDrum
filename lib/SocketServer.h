@@ -3,7 +3,6 @@
 
 #include <ESPAsyncWebServer.h>
 
-const int RED_LED_PIN = 4; 
 
 class WebSocketServer {
 
