@@ -76,7 +76,7 @@ const int RED_LED_PIN = 4;
 // Threshold for movement detection (tune as needed)
 const int threshold = 1;
 
-                const int maxInstruments = 8;
+const int maxInstruments = 8;
 
 
 const int gyroXdiff = 20;
@@ -93,7 +93,7 @@ int stillMomentCount = 0;
 const bool applyLowPassFilter = true;
 
 
-#define BE_SERVER
+// #define BE_SERVER
 
 
 
