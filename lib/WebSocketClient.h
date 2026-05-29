@@ -12,7 +12,6 @@ private:
     const char* _path;
     bool _stompConnected;
 
-    // Statische wrapper voor de bibliotheek callback
     static void _webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
         if (WebSocketClient::instance != nullptr) {
             WebSocketClient::instance->handleEvent(type, payload, length);
