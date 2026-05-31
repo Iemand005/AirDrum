@@ -25,7 +25,6 @@ private:
     void enqueueMessage(const String& payload) {
         size_t nextTail = (_pendingTail + 1) % MAX_PENDING_MESSAGES;
         if (nextTail == _pendingHead) {
-            // Drop the oldest message if the buffer is full.
             _pendingHead = (_pendingHead + 1) % MAX_PENDING_MESSAGES;
         }
 

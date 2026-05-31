@@ -305,9 +305,9 @@ if(!myMPU.init()){
     
     #ifdef BE_SERVER
     
-    server.startListener();
+    drummer.startListener();
     #else
-    client.begin();
+    drummer.begin();
     
     bool success = Ping.ping(SERVER_ADDRESS, 4);
 
@@ -344,9 +344,9 @@ void airLoop() {
     auto lowPassedAccel = lowPassFilter(currentAccel);
     
     #ifdef BE_SERVER
-    server.keepAlive();
+    drummer.keepAlive();
 #else
-  client.loop();
+  drummer.loop();
 #endif
 
     auto jerk = currentAccel - lastAccel;
