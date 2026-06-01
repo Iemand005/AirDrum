@@ -92,7 +92,7 @@ const int maxInstruments = 8;
 
 
 const int gyroXdiff = 20;
-const Vec3I16 gyroThreshold = {1500, 1500, 2000};
+const Vec3I16 gyroThreshold = {1500, 1500, 500};
 const int gyroXIgnoreBelow = 20;
 const Vec3I16 gyroCancel = {-5, -5, -5};
 Vec3I16 gyroSum = {0, 0, 0};
