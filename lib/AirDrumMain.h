@@ -335,7 +335,7 @@ const bool broadcastAccel = true;
 const bool verboseLog = false;
 
 
-int instrumentId = 0;
+int instrumentId = 1;
 
 void airLoop() {
 
@@ -442,7 +442,7 @@ void airLoop() {
                 Serial.println("Switching drum!");
 
                 instrumentId--;
-                instrumentId = max(instrumentId, 0);
+                instrumentId = max(instrumentId, 1);
 
                 gyroSum.z = 0;
             }
@@ -451,7 +451,7 @@ void airLoop() {
                 Serial.println("Switching drum!");
 
                 instrumentId++;
-                instrumentId = min(instrumentId, maxInstruments);
+                instrumentId = min(instrumentId, maxInstruments + 1);
 
                 gyroSum.z = 0;
             }
