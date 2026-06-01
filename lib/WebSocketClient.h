@@ -17,9 +17,8 @@ private:
     String _pendingMessages[MAX_PENDING_MESSAGES];
 
     static void _webSocketEvent(WStype_t type, uint8_t * payload, size_t length) {
-        if (WebSocketClient::instance != nullptr) {
+        if (WebSocketClient::instance != nullptr)
             WebSocketClient::instance->handleEvent(type, payload, length);
-        }
     }
 
     void enqueueMessage(const String& payload) {
