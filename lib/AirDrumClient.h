@@ -18,7 +18,7 @@ class AirDrumClient : public WebSocketClient, public WhaddaServer, public Whadda
 
 public:
 
-  AirDrumClient() : WebSocketClient(SERVER_ADDRESS, 8080, "/ws/raw") {
+  AirDrumClient() : WebSocketClient(SERVER_ADDRESS, 8082, "/ws/raw") {
 
   }
 
