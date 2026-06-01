@@ -22,11 +22,7 @@ public:
 
   }
 
-  void disableWiFi() {
-    WiFi.disconnect(true); 
-    WiFi.mode(WIFI_OFF);
-  }
-
+  
   bool connectWiFi(const char *ssid, const char *password) {
     WiFi.begin(ssid, password);
 
@@ -38,8 +34,13 @@ public:
     Serial.println("");
     Serial.println("Wi-Fi Connected!");
     printIp();
-
+    
     return true;
+  }
+
+  void disableWiFi() {
+    WiFi.disconnect(true); 
+    WiFi.mode(WIFI_OFF);
   }
 
   void printIp() {
