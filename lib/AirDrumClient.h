@@ -53,7 +53,6 @@ public:
 
   void broadcastAcceleration(Vec3I16 accel) {
     DynamicJsonDocument doc(192);
-    doc["deviceId"] = "esp32";
     doc["eventType"] = "ACCEL";
     doc["timestamp"] = millis();
     JsonObject payload = doc.createNestedObject("payload");
@@ -68,7 +67,6 @@ public:
 
   void broadcastGyro(Vec3 gyroe) {
     DynamicJsonDocument doc(192);
-    doc["deviceId"] = "esp32";
     doc["eventType"] = "GYRO";
     doc["timestamp"] = millis();
     JsonObject payload = doc.createNestedObject("payload");
@@ -83,7 +81,6 @@ public:
 
   void broadcastDrumHit(int drumId) {
     DynamicJsonDocument doc(128);
-    doc["deviceId"] = "esp32";
     doc["eventType"] = "DRUM_HIT";
     doc["timestamp"] = millis();
     JsonObject payload = doc.createNestedObject("payload");
