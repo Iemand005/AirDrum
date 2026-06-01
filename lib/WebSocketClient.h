@@ -77,7 +77,7 @@ public:
         _webSocket.onEvent(_webSocketEvent);
         _webSocket.setExtraHeaders();
         _webSocket.begin(_host, _port, _path);
-        _webSocket.setReconnectInterval(5000); 
+        _webSocket.setReconnectInterval(1000); 
     }
 
     void loop() {
