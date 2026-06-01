@@ -73,7 +73,7 @@ const int RED_LED_PIN = 4;
 
 #define transmitRepeat 3
 
-#define sleepThreshold 1000
+#define sleepThreshold 10000
 
 // MPU-9265 I2C address
 #define MPU_ADDR 0x68
