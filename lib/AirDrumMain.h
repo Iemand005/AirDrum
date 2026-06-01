@@ -88,11 +88,11 @@ const int RED_LED_PIN = 4;
 // Threshold for movement detection (tune as needed)
 const int threshold = 1;
 
-const int maxInstruments = 8;
+const int maxInstruments = 7;
 
 
 const int gyroXdiff = 20;
-const Vec3I16 gyroThreshold = {1500, 1500, 500};
+const Vec3I16 gyroThreshold = {700, 1500, 500};
 const int gyroXIgnoreBelow = 20;
 const Vec3I16 gyroCancel = {-5, -5, -5};
 Vec3I16 gyroSum = {0, 0, 0};
