@@ -57,8 +57,6 @@ private:
                 Serial.println(msg);
                 break;
             }
-            default:
-                break;
         }
     }
 
